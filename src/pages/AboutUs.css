@@ -1,0 +1,45 @@
+/* Container and overall typography */
+.aboutus-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+    line-height: 1.7;
+  }
+  
+  /* Header styling */
+  .aboutus-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .aboutus-header h1 {
+    font-size: 2.75rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #222;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Content section styling */
+  .aboutus-content {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    text-align: justify;
+  }
+  
+  .aboutus-content p {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Footer styling */
+  .aboutus-footer {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #777;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+  }
+  

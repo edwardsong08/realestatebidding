@@ -1,0 +1,115 @@
+/* Overall container styling */
+.contactus-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f2f4f8;
+    padding: 1rem;
+  }
+  
+  /* Card styling with fixed min-height */
+  .contactus-card {
+    position: relative;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    min-height: 600px;  /* Fixed overall card height to prevent shifting */
+  }
+  
+  /* Header area styling - fixed at the top of the card */
+  .contactus-header {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    right: 2rem;
+    height: 120px; /* Fixed header height */
+    text-align: center;
+  }
+  
+  .contactus-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .contact-type-selection {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1rem;
+  }
+  
+  .contact-type-selection label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .contact-type-selection input {
+    margin-right: 0.5rem;
+  }
+  
+  /* Form container below header */
+  .contactus-form-container {
+    margin-top: 160px; /* Enough space for header (header height + some spacing) */
+    padding: 0 2rem 2rem;
+  }
+  
+  /* Form styling */
+  .contactus-form {
+    text-align: left;
+  }
+  
+  .form-fields {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  /* Button styling */
+  .btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4facfe;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  .btn:hover {
+    background-color: #00f2fe;
+  }
+  
