@@ -17,27 +17,27 @@ Modules to be included:
 
 General Overview (Mermaid Diagram): 
     graph TD
-        A["Client Browser: HTML, CSS, JS"]
-        B["Frontend App: React, Angular, Vue"]
-        C["Backend API: Python, Django, Flask, FastAPI"]
-        D["SQL Database: PostgreSQL, MySQL"]
-        E["Real-Time Service: WebSockets"]
-        F["Authentication Module: JWT, OAuth2"]
-        G["User Management & Account Services"]
-        H["Property Listings Module: CRUD, Search, Map Integration"]
-        I["Bidding Module: Bid Placement, Validation"]
-        J["Notification Service: Email, SMS API"]
-        K["Admin Interface: Agent Management"]
-        A -->|Renders UI| B
-        B -->|API Calls: REST, GraphQL| C
-        C -->|CRUD & Queries| D
-        C -->|Real-Time Updates| E
-        C --> F
-        C --> G
-        C --> H
-        C --> I
-        C --> J
-        C --> K
+        A["Client Browser: HTML, CSS, JS"];
+        B["Frontend App: React, Angular, Vue"];
+        C["Backend API: Python, Django, Flask, FastAPI"];
+        D["SQL Database: PostgreSQL, MySQL"];
+        E["Real-Time Service: WebSockets"];
+        F["Authentication Module: JWT, OAuth2"];
+        G["User Management & Account Services"];
+        H["Property Listings Module: CRUD, Search, Map Integration"];
+        I["Bidding Module: Bid Placement, Validation"];
+        J["Notification Service: Email, SMS API"];
+        K["Admin Interface: Agent Management"];
+        A -->|Renders UI| B;
+        B -->|API Calls: REST, GraphQL| C;
+        C -->|CRUD & Queries| D;
+        C -->|Real-Time Updates| E;
+        C --> F;
+        C --> G;
+        C --> H;
+        C --> I;
+        C --> J;
+        C --> K;
 
 -----------------------------------------------------------------------------------------------------------------
 # Getting Started with Create React App
