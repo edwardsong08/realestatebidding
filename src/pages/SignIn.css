@@ -86,3 +86,20 @@
     text-decoration: underline;
   }
   
+  /* Existing styles in SignIn.css remain unchanged */
+
+/* Style for link-like buttons */
+.link-button {
+  background: none;
+  border: none;
+  color: #4facfe;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.link-button:hover {
+  color: #00f2fe;
+}
