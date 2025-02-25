@@ -1,33 +1,46 @@
-/* Center the card on the page with a light background */
-.signin-container {
+/* src/pages/ContactUsAuth.css */
+.contactus-auth-container {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background-color: #f2f4f8;
     padding: 1rem;
+    transition: background-color 0.3s, color 0.3s;
   }
   
-  /* Card styling */
-  .signin-card {
+  .contactus-auth-container.dark-mode {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+  }
+  
+  .contactus-auth-card {
     background: #fff;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     text-align: center;
+    transition: background-color 0.3s, color 0.3s;
   }
   
-  /* Heading styling */
-  .signin-card h1 {
+  .contactus-auth-container.dark-mode .contactus-auth-card {
+    background: #2e2e2e;
+    color: #e0e0e0;
+  }
+  
+  .contactus-auth-card h1 {
     margin-bottom: 1.5rem;
     font-size: 2rem;
-    color: #333;
   }
   
-  /* Form styling */
-  .signin-form {
+  .contactus-auth-card p {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .contactus-auth-form {
     text-align: left;
   }
   
@@ -40,10 +53,11 @@
     margin-bottom: 0.5rem;
     font-weight: bold;
     font-size: 0.9rem;
-    color: #555;
+    color: inherit;
   }
   
-  .form-group input {
+  .form-group input,
+  .form-group textarea {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #ddd;
@@ -51,7 +65,11 @@
     font-size: 1rem;
   }
   
-  /* Button styling */
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
   .btn {
     width: 100%;
     padding: 0.75rem;
@@ -69,35 +87,3 @@
     background-color: #00f2fe;
   }
   
-  /* Links styling */
-  .signin-links {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .signin-links a {
-    color: #4facfe;
-    text-decoration: none;
-    font-size: 0.9rem;
-  }
-  
-  .signin-links a:hover {
-    text-decoration: underline;
-  }
-  
-/* Style for link-like buttons */
-.link-button {
-  background: none;
-  border: none;
-  color: #4facfe;
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 0;
-  margin: 0 0.5rem;
-  font-size: 0.9rem;
-}
-
-.link-button:hover {
-  color: #00f2fe;
-}

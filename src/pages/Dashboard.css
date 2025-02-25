@@ -1,0 +1,13 @@
+.dashboard {
+    min-height: 100vh; /* Ensures the container covers the full viewport height */
+    padding: 2rem;
+    background-color: #fff;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .dashboard.dark-mode {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+  }
+  
