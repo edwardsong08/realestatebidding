@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './SignIn.css';
 // Import API helper functions
 import { signUp, logIn } from '../api/auth';
+// Import the global authentication context
+import { AuthContext } from '../context/AuthContext';
 
 const AuthForm = () => {
   // 'signin' | 'signup' | 'forgot'
   const [formType, setFormType] = useState('signin');
-
-  // useNavigate hook allows us to programmatically change routes
   const navigate = useNavigate();
+  // Get the login function from the global AuthContext
+  const { login } = useContext(AuthContext);
 
   // Handle Sign In form submission
   const handleSignIn = async (e) => {
@@ -28,12 +30,12 @@ const AuthForm = () => {
       // Call the logIn function from our API helper, which sends a POST request to our backend
       const response = await logIn(credentials);
       console.log('Sign in successful:', response);
-      // For now, store a temporary auth flag. In production, you might store a token here.
-      localStorage.setItem('isAuthenticated', 'true');
+      // Use the context's login function to update global auth state (pass token if available)
+      login(response.token || true);
       // Redirect the user to the dashboard page
       navigate('/dashboard');
     } catch (error) {
-      console.error('Sign in failed:', error);
+      console.error('Sign in failed:', error.response?.data || error.message);
       // Optionally display an error message to the user here
     }
   };
@@ -57,8 +59,8 @@ const AuthForm = () => {
       // Call the signUp function from our API helper, which sends a POST request to your Django endpoint
       const response = await signUp(userData);
       console.log('Sign up successful:', response);
-      // Set the temporary auth flag
-      localStorage.setItem('isAuthenticated', 'true');
+      // Update global auth state
+      login(response.token || true);
       // Redirect to the dashboard page
       navigate('/dashboard');
     } catch (error) {
@@ -78,11 +80,9 @@ const AuthForm = () => {
   const renderSignIn = () => (
     <>
       <h1>Sign In</h1>
-      {/* Update the form's onSubmit to use our handleSignIn function */}
       <form className="signin-form" onSubmit={handleSignIn}>
         <div className="form-group">
           <label htmlFor="signin-username">Username</label>
-          {/* Input for username */}
           <input
             type="text"
             id="signin-username"
@@ -93,7 +93,6 @@ const AuthForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="signin-password">Password</label>
-          {/* Input for password */}
           <input
             type="password"
             id="signin-password"
@@ -105,7 +104,6 @@ const AuthForm = () => {
         <button type="submit" className="btn">Sign In</button>
       </form>
       <div className="signin-links">
-        {/* Buttons to switch between forms */}
         <button className="link-button" onClick={() => setFormType('signup')}>
           Sign Up
         </button>
@@ -120,11 +118,9 @@ const AuthForm = () => {
   const renderSignUp = () => (
     <>
       <h1>Sign Up</h1>
-      {/* Use handleSignUp for onSubmit */}
       <form className="signin-form" onSubmit={handleSignUp}>
         <div className="form-group">
           <label htmlFor="signup-username">Username</label>
-          {/* Input for username */}
           <input
             type="text"
             id="signup-username"
@@ -135,7 +131,6 @@ const AuthForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="signup-email">Email Address</label>
-          {/* Input for email */}
           <input
             type="email"
             id="signup-email"
@@ -146,7 +141,6 @@ const AuthForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="signup-password">Password</label>
-          {/* Input for password */}
           <input
             type="password"
             id="signup-password"
@@ -169,11 +163,9 @@ const AuthForm = () => {
   const renderForgotPassword = () => (
     <>
       <h1>Reset Password</h1>
-      {/* Use handleForgotPassword for onSubmit */}
       <form className="signin-form" onSubmit={handleForgotPassword}>
         <div className="form-group">
           <label htmlFor="forgot-email">Email Address</label>
-          {/* Input for email */}
           <input
             type="email"
             id="forgot-email"
