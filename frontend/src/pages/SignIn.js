@@ -15,7 +15,6 @@ const AuthForm = () => {
   const handleSignIn = async (e) => {
     e.preventDefault(); // Prevent page reload
     // Retrieve values from the form fields using their name attributes
-    // Now we use 'username' rather than 'email'
     const username = e.target.elements['username'].value;
     const password = e.target.elements['password'].value;
     
@@ -43,7 +42,6 @@ const AuthForm = () => {
   const handleSignUp = async (e) => {
     e.preventDefault(); // Prevent page reload
     // Retrieve values from the sign-up form fields.
-    // Extract 'username' (the input's name is "username")
     const username = e.target.elements['username'].value;
     const email = e.target.elements['email'].value;
     const password = e.target.elements['password'].value;
@@ -84,7 +82,7 @@ const AuthForm = () => {
       <form className="signin-form" onSubmit={handleSignIn}>
         <div className="form-group">
           <label htmlFor="signin-username">Username</label>
-          {/* Change this input to capture username */}
+          {/* Input for username */}
           <input
             type="text"
             id="signin-username"
@@ -95,7 +93,7 @@ const AuthForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="signin-password">Password</label>
-          {/* Name attribute is 'password' for our handler */}
+          {/* Input for password */}
           <input
             type="password"
             id="signin-password"
@@ -126,7 +124,7 @@ const AuthForm = () => {
       <form className="signin-form" onSubmit={handleSignUp}>
         <div className="form-group">
           <label htmlFor="signup-username">Username</label>
-          {/* Name attribute is 'username' */}
+          {/* Input for username */}
           <input
             type="text"
             id="signup-username"
@@ -137,7 +135,7 @@ const AuthForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="signup-email">Email Address</label>
-          {/* Name attribute is 'email' */}
+          {/* Input for email */}
           <input
             type="email"
             id="signup-email"
@@ -148,7 +146,7 @@ const AuthForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="signup-password">Password</label>
-          {/* Name attribute is 'password' */}
+          {/* Input for password */}
           <input
             type="password"
             id="signup-password"
@@ -175,6 +173,7 @@ const AuthForm = () => {
       <form className="signin-form" onSubmit={handleForgotPassword}>
         <div className="form-group">
           <label htmlFor="forgot-email">Email Address</label>
+          {/* Input for email */}
           <input
             type="email"
             id="forgot-email"

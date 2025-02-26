@@ -1,44 +1,33 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
 import logo from './logo.png';
+import { AuthContext } from '../context/AuthContext';
 
 const NavBar = () => {
-  // Initialize authentication state by reading from localStorage.
-  // If the value is 'true', the user is considered authenticated.
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem('isAuthenticated') === 'true'
-  );
+  const { isAuthenticated, logout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Ref for the Settings dropdown container
+  // Refs for detecting clicks outside
   const dropdownRef = useRef(null);
-  // Ref for the hamburger menu container
   const menuRef = useRef(null);
 
-  // Toggle the hamburger menu open/close
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  // Toggle the Settings dropdown open/close
   const toggleSettings = () => {
     setSettingsOpen(!settingsOpen);
   };
 
-  // Handle sign out:
-  //  - Clear the temporary auth flag from localStorage
-  //  - Update the local state
-  //  - Navigate back to the landing page
   const handleSignOut = () => {
-    localStorage.setItem('isAuthenticated', 'false');
-    setIsAuthenticated(false);
+    logout(); // Use the logout function from AuthContext
     navigate('/');
   };
 
-  // Close the Settings dropdown when clicking outside of it
+  // Close Settings dropdown when clicking outside
   useEffect(() => {
     const handleClickOutsideDropdown = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -52,7 +41,7 @@ const NavBar = () => {
     };
   }, []);
 
-  // Close the hamburger menu when clicking outside of it
+  // Close hamburger menu when clicking outside
   useEffect(() => {
     const handleClickOutsideMenu = (event) => {
       if (isOpen && menuRef.current && !menuRef.current.contains(event.target)) {
