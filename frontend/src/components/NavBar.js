@@ -4,31 +4,41 @@ import './NavBar.css';
 import logo from './logo.png';
 
 const NavBar = () => {
+  // Initialize authentication state by reading from localStorage.
+  // If the value is 'true', the user is considered authenticated.
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    localStorage.getItem('isAuthenticated') === 'true'
+  );
   const [isOpen, setIsOpen] = useState(false);
-  // Temporary state for authentication; in a real app, get this from context or props.
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Ref for the dropdown container (for the Settings submenu)
+  // Ref for the Settings dropdown container
   const dropdownRef = useRef(null);
-  // Ref for the hamburger menu (the main navigation links container)
+  // Ref for the hamburger menu container
   const menuRef = useRef(null);
 
+  // Toggle the hamburger menu open/close
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  // Toggle the Settings dropdown open/close
   const toggleSettings = () => {
     setSettingsOpen(!settingsOpen);
   };
 
+  // Handle sign out:
+  //  - Clear the temporary auth flag from localStorage
+  //  - Update the local state
+  //  - Navigate back to the landing page
   const handleSignOut = () => {
+    localStorage.setItem('isAuthenticated', 'false');
     setIsAuthenticated(false);
     navigate('/');
   };
 
-  // Close the Settings dropdown if clicking outside of it
+  // Close the Settings dropdown when clicking outside of it
   useEffect(() => {
     const handleClickOutsideDropdown = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -40,9 +50,9 @@ const NavBar = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutsideDropdown);
     };
-  }, [dropdownRef]);
+  }, []);
 
-  // Close the hamburger menu if clicking outside of it
+  // Close the hamburger menu when clicking outside of it
   useEffect(() => {
     const handleClickOutsideMenu = (event) => {
       if (isOpen && menuRef.current && !menuRef.current.contains(event.target)) {
@@ -54,7 +64,7 @@ const NavBar = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutsideMenu);
     };
-  }, [isOpen, menuRef]);
+  }, [isOpen]);
 
   return (
     <nav className="navbar">
@@ -63,7 +73,7 @@ const NavBar = () => {
         <span>RealEstateBidding</span>
       </div>
       <div className="navbar-links">
-        <ul ref={menuRef} className={`navbar-menu ${isOpen ? "open" : ""}`}>
+        <ul ref={menuRef} className={`navbar-menu ${isOpen ? 'open' : ''}`}>
           {isAuthenticated ? (
             <>
               <li><Link to="/dashboard">My Dashboard</Link></li>

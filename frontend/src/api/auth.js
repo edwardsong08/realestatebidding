@@ -2,6 +2,8 @@
 
 import axios from 'axios';
 
+
+
 // Define the base URL for your Django accounts API endpoints.
 // In this example, your Django server is running on localhost:8000,
 // and your accounts URLs are included under 'api/accounts/' in your main urls.py.
