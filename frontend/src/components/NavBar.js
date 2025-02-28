@@ -57,10 +57,13 @@ const NavBar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo">
-        <img src={logo} alt="Logo" />
-        <span>RealEstateBidding</span>
-      </div>
+      {/* Wrap the logo and company name in a Link */}
+      <Link to={isAuthenticated ? "/dashboard" : "/"}>
+        <div className="navbar-logo">
+          <img src={logo} alt="Logo" />
+          <span>RealEstateBidding</span>
+        </div>
+      </Link>
       <div className="navbar-links">
         <ul ref={menuRef} className={`navbar-menu ${isOpen ? 'open' : ''}`}>
           {isAuthenticated ? (

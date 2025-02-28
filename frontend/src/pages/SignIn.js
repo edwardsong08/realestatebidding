@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './SignIn.css';
 // Import API helper functions
@@ -9,74 +9,77 @@ import { AuthContext } from '../context/AuthContext';
 const AuthForm = () => {
   // 'signin' | 'signup' | 'forgot'
   const [formType, setFormType] = useState('signin');
+  const [signInError, setSignInError] = useState(null);
+  const [signUpErrors, setSignUpErrors] = useState({});
   const navigate = useNavigate();
   // Get the login function from the global AuthContext
   const { login } = useContext(AuthContext);
 
+  // Clear errors when switching between forms
+  useEffect(() => {
+    setSignInError(null);
+    setSignUpErrors({});
+  }, [formType]);
+
   // Handle Sign In form submission
   const handleSignIn = async (e) => {
     e.preventDefault(); // Prevent page reload
-    // Retrieve values from the form fields using their name attributes
     const username = e.target.elements['username'].value;
     const password = e.target.elements['password'].value;
-    
-    // Create an object containing credentials.
-    const credentials = { 
-      username,
-      password 
-    };
+    const credentials = { username, password };
 
     try {
-      // Call the logIn function from our API helper, which sends a POST request to our backend
       const response = await logIn(credentials);
       console.log('Sign in successful:', response);
-      // Use the context's login function to update global auth state (pass token if available)
       login(response.token || true);
-      // Redirect the user to the dashboard page
       navigate('/dashboard');
     } catch (error) {
       console.error('Sign in failed:', error.response?.data || error.message);
-      // Optionally display an error message to the user here
+      setSignInError(
+        error.response?.data?.error || 
+        "Invalid username or password. Please try again."
+      );
     }
   };
 
-  // Handle Sign Up form submission
+  // Handle Sign Up form submission with field-specific error handling
   const handleSignUp = async (e) => {
-    e.preventDefault(); // Prevent page reload
-    // Retrieve values from the sign-up form fields.
+    e.preventDefault();
     const username = e.target.elements['username'].value;
     const email = e.target.elements['email'].value;
     const password = e.target.elements['password'].value;
-    
-    // Prepare the user data object expected by your signUp API helper.
-    const userData = {
-      username, // shorthand for username: username
-      email,    // shorthand for email: email
-      password, // shorthand for password: password
-    };
+    const userData = { username, email, password };
 
     try {
-      // Call the signUp function from our API helper, which sends a POST request to your Django endpoint
       const response = await signUp(userData);
       console.log('Sign up successful:', response);
-      // Update global auth state
+      setSignUpErrors({}); // Clear any previous errors
       login(response.token || true);
-      // Redirect to the dashboard page
       navigate('/dashboard');
     } catch (error) {
-      console.error('Sign up failed:', error);
-      // Optionally display an error message here
+      console.error('Sign up failed:', error.response?.data || error.message);
+      // If the error response includes field-specific errors, update state accordingly
+      if (error.response?.data && typeof error.response.data === 'object') {
+        setSignUpErrors({
+          username: error.response.data.username ? error.response.data.username.join(" ") : "",
+          email: error.response.data.email ? error.response.data.email.join(" ") : "",
+          password: error.response.data.password ? error.response.data.password.join(" ") : "",
+          // Optionally, handle any general error messages
+          general: error.response.data.non_field_errors ? error.response.data.non_field_errors.join(" ") : ""
+        });
+      } else {
+        setSignUpErrors({ general: "Invalid sign up details. Please check your username, email, and password." });
+      }
     }
   };
 
-  // Handle Forgot Password form submission (placeholder; implement as needed)
+  // Handle Forgot Password form submission (placeholder)
   const handleForgotPassword = (e) => {
     e.preventDefault();
     console.log('Forgot password functionality is not yet implemented.');
-    // You can add your forgot-password API call here when ready.
   };
 
-  // Render Sign In form
+  // Render Sign In form with a single error message
   const renderSignIn = () => (
     <>
       <h1>Sign In</h1>
@@ -101,6 +104,7 @@ const AuthForm = () => {
             required
           />
         </div>
+        {signInError && <div className="error-message">{signInError}</div>}
         <button type="submit" className="btn">Sign In</button>
       </form>
       <div className="signin-links">
@@ -114,7 +118,7 @@ const AuthForm = () => {
     </>
   );
 
-  // Render Sign Up form
+  // Render Sign Up form with field-specific error messages
   const renderSignUp = () => (
     <>
       <h1>Sign Up</h1>
@@ -128,6 +132,7 @@ const AuthForm = () => {
             placeholder="Enter your username"
             required
           />
+          {signUpErrors.username && <div className="error-message">{signUpErrors.username}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="signup-email">Email Address</label>
@@ -138,6 +143,7 @@ const AuthForm = () => {
             placeholder="Enter your email"
             required
           />
+          {signUpErrors.email && <div className="error-message">{signUpErrors.email}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="signup-password">Password</label>
@@ -148,7 +154,10 @@ const AuthForm = () => {
             placeholder="Create a password"
             required
           />
+          {signUpErrors.password && <div className="error-message">{signUpErrors.password}</div>}
         </div>
+        {/* Optionally display a general error if present */}
+        {signUpErrors.general && <div className="error-message">{signUpErrors.general}</div>}
         <button type="submit" className="btn">Sign Up</button>
       </form>
       <div className="signin-links">
@@ -159,7 +168,7 @@ const AuthForm = () => {
     </>
   );
 
-  // Render Forgot Password form
+  // Render Forgot Password form (uses single error style if needed)
   const renderForgotPassword = () => (
     <>
       <h1>Reset Password</h1>
