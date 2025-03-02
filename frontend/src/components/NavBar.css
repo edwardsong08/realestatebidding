@@ -50,6 +50,23 @@
   color: #4facfe;
 }
 
+/* Call-to-action styling for Sign In link */
+.navbar-menu li.sign-in-link a {
+  border: 2px solid #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  background-color: transparent; /* Clear background */
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-menu li.sign-in-link a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Subtle tint on hover */
+  color: #fff;
+  border-color: #fff;
+}
+
 /* Dropdown styling for the Settings menu */
 .dropdown {
   position: relative;
@@ -65,11 +82,9 @@
 .dropdown-toggle:hover {
   color: #4facfe;
 }
-
-/* Dropdown menu with animation */
 .dropdown-menu {
   position: absolute;
-  top: 100%; /* places the dropdown below the button */
+  top: 100%;
   right: 0;
   background-color: #333;
   list-style: none;
@@ -136,6 +151,7 @@
     flex-direction: column;
     width: 100%;
     text-align: center;
+    padding: 1rem 0;  /* Added padding for extra vertical space */
     display: none;
   }
   .navbar-menu.open {
@@ -145,3 +161,4 @@
     display: flex;
   }
 }
+

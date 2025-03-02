@@ -1,18 +1,19 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './SignIn.css';
-// Import API helper functions
 import { signUp, logIn } from '../api/auth';
-// Import the global authentication context
 import { AuthContext } from '../context/AuthContext';
 
 const AuthForm = () => {
-  // 'signin' | 'signup' | 'forgot'
-  const [formType, setFormType] = useState('signin');
+  // Use the useLocation hook to read query parameters
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const initialForm = queryParams.get("form") === "signup" ? "signup" : "signin";
+
+  const [formType, setFormType] = useState(initialForm);
   const [signInError, setSignInError] = useState(null);
   const [signUpErrors, setSignUpErrors] = useState({});
   const navigate = useNavigate();
-  // Get the login function from the global AuthContext
   const { login } = useContext(AuthContext);
 
   // Clear errors when switching between forms
@@ -23,7 +24,7 @@ const AuthForm = () => {
 
   // Handle Sign In form submission
   const handleSignIn = async (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault();
     const username = e.target.elements['username'].value;
     const password = e.target.elements['password'].value;
     const credentials = { username, password };
@@ -36,7 +37,8 @@ const AuthForm = () => {
     } catch (error) {
       console.error('Sign in failed:', error.response?.data || error.message);
       setSignInError(
-        error.response?.data?.error || 
+        error.response?.data?.error ||
+        error.response?.data?.detail ||
         "Invalid username or password. Please try again."
       );
     }
@@ -53,18 +55,16 @@ const AuthForm = () => {
     try {
       const response = await signUp(userData);
       console.log('Sign up successful:', response);
-      setSignUpErrors({}); // Clear any previous errors
+      setSignUpErrors({});
       login(response.token || true);
       navigate('/dashboard');
     } catch (error) {
       console.error('Sign up failed:', error.response?.data || error.message);
-      // If the error response includes field-specific errors, update state accordingly
       if (error.response?.data && typeof error.response.data === 'object') {
         setSignUpErrors({
           username: error.response.data.username ? error.response.data.username.join(" ") : "",
           email: error.response.data.email ? error.response.data.email.join(" ") : "",
           password: error.response.data.password ? error.response.data.password.join(" ") : "",
-          // Optionally, handle any general error messages
           general: error.response.data.non_field_errors ? error.response.data.non_field_errors.join(" ") : ""
         });
       } else {
@@ -156,7 +156,6 @@ const AuthForm = () => {
           />
           {signUpErrors.password && <div className="error-message">{signUpErrors.password}</div>}
         </div>
-        {/* Optionally display a general error if present */}
         {signUpErrors.general && <div className="error-message">{signUpErrors.general}</div>}
         <button type="submit" className="btn">Sign Up</button>
       </form>
@@ -168,7 +167,7 @@ const AuthForm = () => {
     </>
   );
 
-  // Render Forgot Password form (uses single error style if needed)
+  // Render Forgot Password form (placeholder)
   const renderForgotPassword = () => (
     <>
       <h1>Reset Password</h1>

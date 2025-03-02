@@ -11,19 +11,20 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   // Refs for detecting clicks outside
+  const navMenuContainerRef = useRef(null);
   const dropdownRef = useRef(null);
-  const menuRef = useRef(null);
 
+  // Toggle hamburger menu
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prevIsOpen) => !prevIsOpen);
   };
 
   const toggleSettings = () => {
-    setSettingsOpen(!settingsOpen);
+    setSettingsOpen((prevSettingsOpen) => !prevSettingsOpen);
   };
 
   const handleSignOut = () => {
-    logout(); // Use the logout function from AuthContext
+    logout();
     navigate('/');
   };
 
@@ -41,17 +42,17 @@ const NavBar = () => {
     };
   }, []);
 
-  // Close hamburger menu when clicking outside
+  // Close hamburger menu when clicking outside of the entire nav menu container
   useEffect(() => {
-    const handleClickOutsideMenu = (event) => {
-      if (isOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+    const handleClickOutsideContainer = (event) => {
+      if (isOpen && navMenuContainerRef.current && !navMenuContainerRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutsideMenu);
+    document.addEventListener('mousedown', handleClickOutsideContainer);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutsideMenu);
+      document.removeEventListener('mousedown', handleClickOutsideContainer);
     };
   }, [isOpen]);
 
@@ -64,8 +65,9 @@ const NavBar = () => {
           <span>RealEstateBidding</span>
         </div>
       </Link>
-      <div className="navbar-links">
-        <ul ref={menuRef} className={`navbar-menu ${isOpen ? 'open' : ''}`}>
+      {/* Wrap the menu and hamburger icon in the same container */}
+      <div className="navbar-links" ref={navMenuContainerRef}>
+        <ul className={`navbar-menu ${isOpen ? 'open' : ''}`}>
           {isAuthenticated ? (
             <>
               <li><Link to="/dashboard">My Dashboard</Link></li>
@@ -94,9 +96,9 @@ const NavBar = () => {
           ) : (
             <>
               <li><Link to="/">Home</Link></li>
-              <li><Link to="/signin">Sign In</Link></li>
               <li><Link to="/aboutus">About Us</Link></li>
               <li><Link to="/contactus">Contact Us</Link></li>
+              <li className="sign-in-link"><Link to="/signin">Sign In</Link></li>
             </>
           )}
         </ul>
