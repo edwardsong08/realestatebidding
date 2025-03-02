@@ -7,6 +7,11 @@
   background-color: #333;
   color: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed; /* Or relative, if you prefer, but fixed ensures it stays on top */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Make sure this value is higher than any z-index in your hero section */
 }
 
 /* Logo styling */
