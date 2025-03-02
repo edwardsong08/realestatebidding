@@ -134,18 +134,21 @@ const LandingPage = () => {
         </div>
       </section>
 
-            {/* Call-to-Action Section */}
-      <section className="cta-section">
-        <div className="cta-content">
-          <h2>Experience the Future of Real Estate Transactions</h2>
-          <p>
-            Explore a platform where every detail is engineered for transparency and efficiency. Ready to transform the way you transact? Dive in and discover the benefits.
-          </p>
-          <Link to="/signin?form=signup" className="hero-button">
-            Get Started
-          </Link>
-        </div>
-      </section>
+              {/* Split Call-to-Action Section */}
+  <section className="cta-split-section">
+    <div className="cta-image"></div>
+    <div className="cta-text">
+      <h2>Experience the Future of Real Estate Transactions</h2>
+      <p>
+        Explore a platform where every detail is engineered for transparency and efficiency.
+        Ready to transform the way you transact? Dive in and discover the benefits.
+      </p>
+      <Link to="/signin?form=signup" className="cta-button">
+        Get Started
+      </Link>
+    </div>
+  </section>
+
 
       {/* Footer */}
       <footer className="landing-footer">
