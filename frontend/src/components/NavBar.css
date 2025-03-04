@@ -11,7 +11,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000; /* Make sure this value is higher than any z-index in your hero section */
+  z-index: 100000; /* Make sure this value is higher than any z-index in your hero section */
 }
 
 /* Logo styling */

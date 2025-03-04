@@ -1,3 +1,10 @@
+/* Reset default margins on html/body */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden;
+}
+
 /* General styles */
 .landing-page {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -7,7 +14,10 @@
 
 /* Hero Section */
 .hero-section {
-  height: 100vh; /* Full viewport height */
+  /* Use the computed viewport height */
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
   background: url('./herobg.jpg') center/cover no-repeat;
   position: relative;
   display: flex;
@@ -16,27 +26,24 @@
   text-align: center;
   color: #fff;
 }
+
 .hero-section::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* Darker overlay for improved readability */
+  inset: 0; /* shorthand for top: 0; right: 0; bottom: 0; left: 0; */
+  background: rgba(0, 0, 0, 0.462);
   z-index: 1;
 }
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2; /* Ensure hero content is above the overlay */
   max-width: 800px;
-  padding: 0 1rem;
-  z-index: 10000;
+  padding: 1rem 1rem 0;
 }
 .hero-content h1 {
   font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   line-height: 1.2;
 }
 .hero-button {
@@ -59,15 +66,16 @@
 /* Why Choose Section */
 .why-choose-section {
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background: linear-gradient(135deg, #001f3f, #00264d, #003366);
   text-align: center;
   color: #fff;
 }
 
 .why-choose-content {
-  max-width: 800px;
+  max-width: 90%;
   margin: 0 auto;
   padding: 0 1rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .why-choose-content h2 {
@@ -83,102 +91,153 @@
   color: #d0d0d0;
 }
 
-.benefits-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 800px;
-}
-
-.benefits-list li {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1rem 1.5rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.benefits-list li:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-3px);
-}
-
-.benefits-list li strong {
-  color: #4facfe;
-}
-
-/* What We Can Do for You Section */
-.what-we-can-section {
-  padding: 4rem 2rem;
-  background-color: #fff;
-  text-align: center;
-}
-
-.what-we-can-section h2 {
-  font-size: 2.8rem;
-  margin-bottom: 2rem;
-  color: #333;
-}
-
-.what-we-can-cards {
+.why-choose-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
-.what-we-can-card {
-  background: #f2f4f8;
+.why-choose-card {
+  background: linear-gradient(135deg, #f8f8f8, #ffffff);
   border-radius: 8px;
   padding: 1.5rem;
-  width: 350px;
+  flex: 1 1 300px;
+  max-width: 350px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #333;
+  aspect-ratio: 1.2 / 1;  /* Enforces a square shape */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers content vertically */
+  align-items: center; /* Centers content horizontally */
 }
 
-.what-we-can-card:hover {
+
+.why-choose-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
-.what-we-can-card h3 {
+/* Card icon styling */
+.card-icon {
+  display: block;
+  width: 3rem;  /* Increase icon size */
+  margin: 0 auto 1rem; /* Center and add space below */
+}
+
+/* Card title and paragraph */
+.why-choose-card h3 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
   color: #4facfe; /* Accent color */
 }
 
-.what-we-can-card p {
+.why-choose-card p {
   font-size: 1rem;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.what-we-can-card ul {
-  list-style: none;
-  padding: 0;
+  line-height: 1.5;
   margin: 0;
 }
 
-.what-we-can-card ul li {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-  color: #555;
+.what-we-can-fullwidth {
+  width: 100%;
+  background-color: #222;  /* Dark background for a unified look */
+  color: #fff;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-.what-we-can-card ul li strong {
+.fullwidth-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Calculate each row’s height based on the cell width and aspect ratio */
+  grid-template-rows: repeat(3, calc((100vw / 2) / 1.3));
+  gap: 0; /* No gaps for edge-to-edge */
+  width: 100%;
+}
+
+/* Shared grid item styling */
+.fullwidth-grid .grid-item {
+  /* Removing the aspect-ratio property now that we’re explicitly setting row heights */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Text Boxes */
+.text-box {
+  background: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.text-box h3 {
+  font-size: 2.2rem; /* Larger heading */
+  font-weight: 700;
+  margin-bottom: 1rem;
   color: #4facfe;
+}
+
+.text-box p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.text-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.text-box ul li {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+.text-box ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #4facfe;
+  font-size: 1.2rem;
+}
+
+
+/* Image Boxes */
+.image-box {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Optional: Add an overlay if needed */
+.image-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.197);
 }
 
 /* Where We Operate Section */
 .where-we-operate-section {
   padding: 4rem 2rem;
-  background-color: #f9f9f9;
+  background-color: #f1f3f5; /* Light, modern grey background */
   text-align: center;
 }
 
@@ -186,15 +245,16 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 0 1rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .where-we-operate-content h2 {
   font-size: 2.8rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: #333; /* Dark text for headings */
 }
 
-.where-we-operate-content p {
+.where-we-operate-content .subheading {
   font-size: 1.2rem;
   margin-bottom: 2rem;
   color: #555;
@@ -209,43 +269,39 @@
 
 .state-card {
   background: #fff;
-  border: 2px dashed #ccc;
+  border: 2px solid #e0e0e0;
   border-radius: 8px;
-  padding: 1rem;
-  width: 250px;
-  text-align: center;
-  transition: transform 0.3s ease;
+  padding: 1.5rem;
+  flex: 1 1 250px;
+  max-width: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .state-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .state-image {
-  width: 100%;
-  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1rem;
-  background-color: #eaeaea;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
-/* Example placeholders for state outlines */
-.state-image.new-york {
-  background-image: url('https://via.placeholder.com/250x150?text=NY');
-}
-
-.state-image.new-jersey {
-  background-image: url('https://via.placeholder.com/250x150?text=NJ');
+.state-image img {
+  max-width: 100%;
+  max-height: 150px;
+  object-fit: contain;
 }
 
 .state-card h3 {
   font-size: 1.6rem;
   color: #333;
+  margin: 0;
 }
+
 
 /* Testimonial Section */
 .testimonial-section {
