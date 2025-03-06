@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust width for a thinner scrollbar */
+  height: 8px; /* If you want to style horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f3f5; /* Light grey track (matching your landing page background) */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #001f3f; /* Dark navy thumb (adjust to your specific navy) */
+  border-radius: 4px;
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: thin; /* Options: auto, thin, none */
+  /* Set the thumb and track colors: first color is the thumb, second is the track */
+  scrollbar-color: #001f3f #f1f3f5;
+}

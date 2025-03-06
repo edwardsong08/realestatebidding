@@ -1,42 +1,84 @@
-/* Base navbar styling remains unchanged */
+/* Global Reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Global Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Base navbar styling */
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Thinner navbar */
+  background: transparent;
+  color: #fff;
+  box-shadow: none;
+  z-index: 100000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+/* Inner container to fix content width and align items flush */
+.navbar-inner {
+  width: 100%;
+  padding: 0 1rem;  /* Adds space on left and right */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 2rem;
-  background-color: #333;
-  color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: fixed; /* Or relative, if you prefer, but fixed ensures it stays on top */
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100000; /* Make sure this value is higher than any z-index in your hero section */
 }
 
-/* Logo styling */
+/* Navbar link reset */
+.navbar a {
+  text-decoration: none !important;
+  color: inherit;
+}
+.navbar a:link,
+.navbar a:visited,
+.navbar a:focus,
+.navbar a:active {
+  text-decoration: none;
+  outline: none;
+  text-decoration-color: transparent;
+}
+
+/* Solid background when scrolled */
+.navbar.scrolled {
+  background-color: #333;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Logo styling using flexbox, flush to left */
 .navbar-logo {
-  position: relative;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
+  margin-left: 0; /* Flush left */
 }
 .navbar-logo img {
-  position: absolute;
-  height: 80px;
+  height: 40px; /* Smaller logo */
   width: auto;
-  top: 50%;
-  transform: translateY(-47%);
+  margin-right: 0.5rem;
 }
 .navbar-logo span {
-  margin-left: 80px;
   font-size: 1.5rem;
   font-weight: bold;
   color: #fff;
+  margin: 0;
 }
 
-/* Navbar links styling */
+/* Navbar links styling, flush to right */
 .navbar-links {
   display: flex;
   align-items: center;
+  margin-right: 0; /* Flush right */
 }
 .navbar-menu {
   display: flex;
@@ -60,14 +102,13 @@
   border: 2px solid #fff;
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
-  background-color: transparent; /* Clear background */
+  background-color: transparent;
   color: #fff;
   font-weight: bold;
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
-
 .navbar-menu li.sign-in-link a:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Subtle tint on hover */
+  background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
   border-color: #fff;
 }
@@ -98,7 +139,6 @@
   border-radius: 4px;
   min-width: 150px;
   z-index: 1000;
-  
   opacity: 0;
   transform: translateY(-10px);
   pointer-events: none;
@@ -156,7 +196,7 @@
     flex-direction: column;
     width: 100%;
     text-align: center;
-    padding: 1rem 0;  /* Added padding for extra vertical space */
+    padding: 1rem 0;
     display: none;
   }
   .navbar-menu.open {
@@ -166,4 +206,3 @@
     display: flex;
   }
 }
-
