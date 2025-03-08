@@ -1,115 +1,176 @@
-/* Overall container styling */
-.contactus-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f2f4f8;
-    padding: 1rem;
+:root {
+  --primary-color: #4facfe;
+  --secondary-color: #001f3f;
+  --bg-dark: #222;
+  --text-color: #333;
+  --light-bg: #f1f3f5;
+  --transition-duration: 0.3s;
+  --transition-ease: ease;
+}
+
+.contactus-page {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--text-color);
+}
+
+/* Hero Section */
+.contactus-hero {
+  position: relative;
+  height: 300px;
+  background: url('./contact-hero.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contactus-hero .overlay {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.contactus-hero h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+.contactus-hero p {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+/* Main Content */
+.contactus-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 4rem 2rem;
+  background: var(--light-bg);
+}
+.contact-info,
+.contact-form-container {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+.contact-info h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+.contact-info p {
+  margin-bottom: 0.5rem;
+}
+.map-placeholder {
+  height: 200px;
+  background: url('./tempimagemap.jpg') center/cover no-repeat;
+  border-radius: 8px;
+  margin-top: 1rem;
+  z-index: 100; position: relative;
+}
+
+/* Tabs for Form */
+.form-header .tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+.tabs button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--text-color);
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--transition-duration);
+}
+.tabs button.active {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* Form Styles */
+.contact-form .form-group {
+  margin-bottom: 1.5rem;
+}
+.contact-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color var(--transition-duration);
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color var(--transition-duration);
+}
+.btn:hover {
+  background-color: #337ab7;
+}
+
+.landing-footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contactus-content {
+    flex-direction: column;
   }
-  
-  /* Card styling with fixed min-height */
-  .contactus-card {
-    position: relative;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-    min-height: 600px;  /* Fixed overall card height to prevent shifting */
-  }
-  
-  /* Header area styling - fixed at the top of the card */
-  .contactus-header {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    right: 2rem;
-    height: 120px; /* Fixed header height */
-    text-align: center;
-  }
-  
-  .contactus-header h1 {
-    margin: 0;
-    font-size: 2rem;
-    color: #333;
-  }
-  
-  .contact-type-selection {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    font-size: 1rem;
-  }
-  
-  .contact-type-selection label {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-  }
-  
-  .contact-type-selection input {
-    margin-right: 0.5rem;
-  }
-  
-  /* Form container below header */
-  .contactus-form-container {
-    margin-top: 160px; /* Enough space for header (header height + some spacing) */
-    padding: 0 2rem 2rem;
-  }
-  
-  /* Form styling */
-  .contactus-form {
-    text-align: left;
-  }
-  
-  .form-fields {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  
-  /* Button styling */
-  .btn {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #4facfe;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 1rem;
-  }
-  
-  .btn:hover {
-    background-color: #00f2fe;
-  }
-  
+}
+
+.fade-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-element.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-zoom {
+  opacity: 0;
+  transform: scale(1.2);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-zoom.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}

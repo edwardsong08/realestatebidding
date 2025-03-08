@@ -1,103 +1,282 @@
-/* Center the card on the page with a light background */
-.signin-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #f2f4f8;
-    padding: 1rem;
-  }
-  
-  /* Card styling */
-  .signin-card {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  }
-  
-  /* Heading styling */
-  .signin-card h1 {
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-    color: #333;
-  }
-  
-  /* Form styling */
-  .signin-form {
-    text-align: left;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  /* Button styling */
-  .btn {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #4facfe;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 1rem;
-  }
-  
-  .btn:hover {
-    background-color: #00f2fe;
-  }
-  
-  /* Links styling */
-  .signin-links {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .signin-links a {
-    color: #4facfe;
-    text-decoration: none;
-    font-size: 0.9rem;
-  }
-  
-  .signin-links a:hover {
-    text-decoration: underline;
-  }
-  
-/* Style for link-like buttons */
-.link-button {
-  background: none;
-  border: none;
-  color: #4facfe;
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 0;
-  margin: 0 0.5rem;
-  font-size: 0.9rem;
+:root {
+  --primary-color: #4facfe;
+  --secondary-color: #001f3f;
+  --bg-dark: #222;
+  --text-color: #333;
+  --light-bg: #f1f3f5;
+  --transition-duration: 0.3s;
+  --transition-ease: ease;
 }
 
-.link-button:hover {
-  color: #00f2fe;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: var(--light-bg);
+}
+
+/* Hero Section with Welcome Text */
+.signin-hero {
+  position: relative;
+  height: 300px; /* Matches the ContactUs hero height */
+  background: url('./signin-hero.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The hero overlay is static */
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Only the hero text (container) fades in */
+.hero-text {
+  text-align: center;
+  color: #fff;
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Split Layout: Two Card Containers */
+.signin-content {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 720px; /* Extended page length to show more of the image */
+  padding: 2rem;
+  gap: 2rem;
+}
+
+/* Card Container (applied to both cards; entire container fades in) */
+.signin-card-container {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Left Card: Image in a Card with Platform Benefits */
+.signin-info {
+  height: 100%;
+  background: url('./signin-info.jpg') center/cover no-repeat;
+  position: relative;
+}
+
+/* The opaque overlay is static */
+.info-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Place text near the bottom */
+  align-items: center;
+  text-align: center;
+}
+
+/* Info text styles */
+.info-text {
+  color: #fff;
+}
+
+.info-title {
+  font-size: 2.5rem;
+  margin: 0 0 0.5rem;
+}
+
+.info-description {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  max-width: 90%;
+}
+
+/* Right Card: Authentication Form (aligned toward the top) */
+.auth-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content at the top */
+  padding: 2.5rem;
+  background: #fff;
+}
+
+.form-title {
+  text-align: left;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.auth-form {
+  width: 100%;
+}
+
+.auth-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color var(--transition-duration);
+}
+
+.auth-form input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.error-message {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Primary button */
+.btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition-duration);
+  margin-top: 1rem;
+}
+
+.btn:hover {
+  background-color: #337ab7;
+}
+
+.back-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color var(--transition-duration), color var(--transition-duration);
+  margin-top: 1rem;
+}
+
+.back-button:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+
+/* Divider with OR text */
+.or-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+
+.or-divider span {
+  margin: 0 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Action Buttons: Secondary Buttons (stacked vertically) */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.secondary-btn {
+  width: 100%;
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color var(--transition-duration), color var(--transition-duration);
+}
+
+.secondary-btn:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* Footer Styling (same as Landing and AboutUs pages) */
+.landing-footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Fade-in Effect for Elements with class 'fade-element' */
+.fade-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-element.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .signin-content {
+    flex-direction: column;
+  }
+  .signin-card-container {
+    min-height: auto;
+  }
+  .auth-card {
+    padding: 1.5rem;
+  }
 }

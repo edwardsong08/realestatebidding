@@ -9,15 +9,26 @@ import sellersImage from './resources/homeseller.jpg';
 import agentsImage from './resources/realestateagent.jpg';
 import newYorkIcon from './resources/new-york.png';
 import newJerseyIcon from './resources/new-jersey.png';
-import callToActionImg from './resources/calltoactionimg.jpg'; // ensure this file exists
+import callToActionImg from './resources/calltoactionimg.jpg';
 
 const LandingPage = () => {
   useEffect(() => {
     // Scroll to the top on mount
     window.scrollTo(0, 0);
 
-    // Set up the intersection observer for fade-in effects.
-    // Now targets fade-element, fade-zoom, and fade-text.
+    // Parallax effect: adjust background position on scroll
+    const handleScroll = () => {
+      const offset = window.pageYOffset * 0.5;
+      const heroSection = document.querySelector('.hero-section');
+      if (heroSection) {
+        heroSection.style.backgroundPosition = `center calc(40% + ${offset}px)`;
+      }
+    };
+    
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Intersection Observer for fade-in effects.
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
@@ -34,17 +45,19 @@ const LandingPage = () => {
     elements.forEach(el => observer.observe(el));
 
     return () => {
+      window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
   }, []);
 
   return (
     <div className="landing-page">
-      {/* Full-Screen Hero Section */}
+      {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content fade-element">
           <h1>
-            Real estate made simple. Streamline your transactions and maximize results.
+            Real estate made simple. <br/>
+            Streamline your transactions and maximize results.
           </h1>
           <Link to="/signin?form=signup" className="cta-button">
             Get Started
@@ -89,7 +102,7 @@ const LandingPage = () => {
               style={{ backgroundImage: `url(${buyersImage})` }}
             ></div>
           </div>
-          {/* Top Right: Text for Buyers - only text fades */}
+          {/* Top Right: Text for Buyers */}
           <div className="grid-item text-box top-right">
             <div className="text-fade fade-text">
               <h3>For Buyers</h3>
@@ -107,7 +120,7 @@ const LandingPage = () => {
               </ul>
             </div>
           </div>
-          {/* Middle Left: Text for Sellers - only text fades */}
+          {/* Middle Left: Text for Sellers */}
           <div className="grid-item text-box middle-left">
             <div className="text-fade fade-text">
               <h3>For Sellers</h3>
@@ -139,7 +152,7 @@ const LandingPage = () => {
               style={{ backgroundImage: `url(${agentsImage})` }}
             ></div>
           </div>
-          {/* Bottom Right: Text for Agents & Partners - only text fades */}
+          {/* Bottom Right: Text for Agents & Partners */}
           <div className="grid-item text-box bottom-right">
             <div className="text-fade fade-text">
               <h3>For Real Estate Agents &amp; Partners</h3>

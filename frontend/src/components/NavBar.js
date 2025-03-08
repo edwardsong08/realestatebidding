@@ -13,7 +13,7 @@ const NavBar = () => {
   const location = useLocation();
 
   // Enable transparent behavior on landing ("/") and About Us ("/aboutus") pages
-  const enableTransparentBehavior = location.pathname === '/' || location.pathname === '/aboutus';
+  const enableTransparentBehavior = location.pathname === '/' || location.pathname === '/aboutus' || location.pathname === '/contactus' || location.pathname === '/signin';
 
   // Refs for clicks outside
   const navMenuContainerRef = useRef(null);

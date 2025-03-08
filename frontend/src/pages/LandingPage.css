@@ -37,10 +37,10 @@ html, body {
   transform: translateY(0);
 }
 
-/* New fade-zoom effect for images now applied to the inner wrapper */
+/* Fade-Zoom for Images */
 .fade-zoom {
   opacity: 0;
-  transform: scale(1.2); /* Increased scale for more noticeable zoom */
+  transform: scale(1.2);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 .fade-zoom.fade-in {
@@ -48,7 +48,7 @@ html, body {
   transform: scale(1);
 }
 
-/* New fade effect for text content within text boxes */
+/* Fade Effect for Text */
 .fade-text {
   opacity: 0;
   transform: translateY(20px);
@@ -62,13 +62,13 @@ html, body {
   transform: translateY(0);
 }
 
-/* For image grid items, ensure they clip any overflow */
+/* Image Grid Items */
 .grid-item.image-box {
   overflow: hidden;
   position: relative;
 }
 
-/* Define the inner container that will get the zoom effect */
+/* Inner Container for Zoom Effect */
 .image-inner {
   width: 100%;
   height: 100%;
@@ -76,10 +76,9 @@ html, body {
   background-position: center;
 }
 
-/* Hero Section */
+/* Hero Section with Subtle Parallax */
 .hero-section {
   height: 100vh;
-  max-height: 100vh;
   overflow: hidden;
   background: url('./herobg.jpg') center/cover no-repeat;
   position: relative;
@@ -89,6 +88,19 @@ html, body {
   text-align: center;
   color: #fff;
   padding: 0 var(--section-padding);
+  /* Initial background position */
+  background-position: center 40%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-section h1 {
+  font-size: 3rem; /* Adjust the value as needed */
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
 }
 
 .hero-section::after {
@@ -99,20 +111,7 @@ html, body {
   z-index: 1;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-  padding: 1rem;
-}
-
-.hero-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-}
-
-/* Unified CTA Button for Hero & CTA Sections */
+/* CTA Button */
 .cta-button {
   display: inline-block;
   background-color: var(--primary-color);
@@ -174,7 +173,7 @@ html, body {
   padding: 1.5rem;
   flex: 1 1 350px;
   max-width: 450px;
-  min-height: 400px;  /* Increased minimum height for a taller card */
+  min-height: 400px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -190,27 +189,24 @@ html, body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Card Icon */
 .card-icon {
   display: block;
   width: 3rem;
   margin: 0 auto 1rem;
 }
 
-/* Card Text */
 .why-choose-card h3 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
   color: var(--primary-color);
-  padding: 0 0.5rem; /* Provide some horizontal padding */
+  padding: 0 0.5rem;
 }
 
 .why-choose-card p {
   font-size: 1rem;
   line-height: 1.5;
   margin: 0 auto;
-  max-width: 80%; /* Constrain the paragraph width */
-  transition: none; /* Ensure that no unwanted transition affects it */
+  max-width: 80%;
 }
 
 /* Full-Width "What We Can Do for You" Section */
@@ -264,9 +260,9 @@ html, body {
 .text-box ul {
   list-style: none;
   padding: 0;
-  margin: 0 auto; /* Center the list block */
+  margin: 0 auto;
   max-width: 90%;
-  display: inline-block; /* shrink to content and center */
+  display: inline-block;
   text-align: left;
 }
 
@@ -410,7 +406,7 @@ html, body {
   flex: 1;
   position: relative;
   overflow: hidden;
-  height: 600px; /* Explicit height so image shows */
+  height: 600px;
 }
 
 .cta-text {

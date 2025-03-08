@@ -1,11 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './SignIn.css';
 import { signUp, logIn } from '../api/auth';
 import { AuthContext } from '../context/AuthContext';
 
 const AuthForm = () => {
-  // Use the useLocation hook to read query parameters
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const initialForm = queryParams.get("form") === "signup" ? "signup" : "signin";
@@ -16,13 +15,17 @@ const AuthForm = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
-  // Clear errors when switching between forms
   useEffect(() => {
     setSignInError(null);
     setSignUpErrors({});
   }, [formType]);
 
-  // Handle Sign In form submission
+  // Apply fade-in to elements with the 'fade-element' class on mount
+  useEffect(() => {
+    const fadeElements = document.querySelectorAll('.fade-element');
+    fadeElements.forEach(el => el.classList.add('fade-in'));
+  }, []);
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     const username = e.target.elements['username'].value;
@@ -31,11 +34,9 @@ const AuthForm = () => {
 
     try {
       const response = await logIn(credentials);
-      console.log('Sign in successful:', response);
       login(response.token || true);
       navigate('/dashboard');
     } catch (error) {
-      console.error('Sign in failed:', error.response?.data || error.message);
       setSignInError(
         error.response?.data?.error ||
         error.response?.data?.detail ||
@@ -44,7 +45,6 @@ const AuthForm = () => {
     }
   };
 
-  // Handle Sign Up form submission with field-specific error handling
   const handleSignUp = async (e) => {
     e.preventDefault();
     const username = e.target.elements['username'].value;
@@ -54,12 +54,10 @@ const AuthForm = () => {
 
     try {
       const response = await signUp(userData);
-      console.log('Sign up successful:', response);
       setSignUpErrors({});
       login(response.token || true);
       navigate('/dashboard');
     } catch (error) {
-      console.error('Sign up failed:', error.response?.data || error.message);
       if (error.response?.data && typeof error.response.data === 'object') {
         setSignUpErrors({
           username: error.response.data.username ? error.response.data.username.join(" ") : "",
@@ -73,119 +71,82 @@ const AuthForm = () => {
     }
   };
 
-  // Handle Forgot Password form submission (placeholder)
   const handleForgotPassword = (e) => {
     e.preventDefault();
-    console.log('Forgot password functionality is not yet implemented.');
+    // Implement forgot password functionality as needed
   };
 
-  // Render Sign In form with a single error message
   const renderSignIn = () => (
     <>
-      <h1>Sign In</h1>
-      <form className="signin-form" onSubmit={handleSignIn}>
+      <h2 className="form-title">Sign In</h2>
+      <form className="auth-form" onSubmit={handleSignIn}>
         <div className="form-group">
           <label htmlFor="signin-username">Username</label>
-          <input
-            type="text"
-            id="signin-username"
-            name="username"
-            placeholder="Enter your username"
-            required
-          />
+          <input type="text" id="signin-username" name="username" placeholder="Enter your username" required />
         </div>
         <div className="form-group">
           <label htmlFor="signin-password">Password</label>
-          <input
-            type="password"
-            id="signin-password"
-            name="password"
-            placeholder="Enter your password"
-            required
-          />
+          <input type="password" id="signin-password" name="password" placeholder="Enter your password" required />
         </div>
         {signInError && <div className="error-message">{signInError}</div>}
         <button type="submit" className="btn">Sign In</button>
       </form>
-      <div className="signin-links">
-        <button className="link-button" onClick={() => setFormType('signup')}>
-          Sign Up
+      <div className="or-divider">
+        <span>OR</span>
+      </div>
+      <div className="action-buttons">
+        <button className="secondary-btn" onClick={() => setFormType('signup')}>
+          Create an Account
         </button>
-        <button className="link-button" onClick={() => setFormType('forgot')}>
+        <button className="secondary-btn" onClick={() => setFormType('forgot')}>
           Forgot Password?
         </button>
       </div>
     </>
   );
 
-  // Render Sign Up form with field-specific error messages
   const renderSignUp = () => (
     <>
-      <h1>Sign Up</h1>
-      <form className="signin-form" onSubmit={handleSignUp}>
+      <h2 className="form-title">Sign Up</h2>
+      <form className="auth-form" onSubmit={handleSignUp}>
         <div className="form-group">
           <label htmlFor="signup-username">Username</label>
-          <input
-            type="text"
-            id="signup-username"
-            name="username"
-            placeholder="Enter your username"
-            required
-          />
+          <input type="text" id="signup-username" name="username" placeholder="Choose a username" required />
           {signUpErrors.username && <div className="error-message">{signUpErrors.username}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="signup-email">Email Address</label>
-          <input
-            type="email"
-            id="signup-email"
-            name="email"
-            placeholder="Enter your email"
-            required
-          />
+          <input type="email" id="signup-email" name="email" placeholder="Your email address" required />
           {signUpErrors.email && <div className="error-message">{signUpErrors.email}</div>}
         </div>
         <div className="form-group">
           <label htmlFor="signup-password">Password</label>
-          <input
-            type="password"
-            id="signup-password"
-            name="password"
-            placeholder="Create a password"
-            required
-          />
+          <input type="password" id="signup-password" name="password" placeholder="Create a password" required />
           {signUpErrors.password && <div className="error-message">{signUpErrors.password}</div>}
         </div>
         {signUpErrors.general && <div className="error-message">{signUpErrors.general}</div>}
         <button type="submit" className="btn">Sign Up</button>
       </form>
-      <div className="signin-links">
-        <button className="link-button" onClick={() => setFormType('signin')}>
+      <div className="form-switch">
+        <button className="back-button" onClick={() => setFormType('signin')}>
           Back to Sign In
         </button>
       </div>
     </>
   );
 
-  // Render Forgot Password form (placeholder)
   const renderForgotPassword = () => (
     <>
-      <h1>Reset Password</h1>
-      <form className="signin-form" onSubmit={handleForgotPassword}>
+      <h2 className="form-title">Reset Password</h2>
+      <form className="auth-form" onSubmit={handleForgotPassword}>
         <div className="form-group">
           <label htmlFor="forgot-email">Email Address</label>
-          <input
-            type="email"
-            id="forgot-email"
-            name="email"
-            placeholder="Enter your email"
-            required
-          />
+          <input type="email" id="forgot-email" name="email" placeholder="Enter your email" required />
         </div>
         <button type="submit" className="btn">Send Reset Link</button>
       </form>
-      <div className="signin-links">
-        <button className="link-button" onClick={() => setFormType('signin')}>
+      <div className="form-switch">
+        <button className="back-button" onClick={() => setFormType('signin')}>
           Back to Sign In
         </button>
       </div>
@@ -193,12 +154,45 @@ const AuthForm = () => {
   );
 
   return (
-    <div className="signin-container">
-      <div className="signin-card">
-        {formType === 'signin' && renderSignIn()}
-        {formType === 'signup' && renderSignUp()}
-        {formType === 'forgot' && renderForgotPassword()}
-      </div>
+    <div className="signin-page">
+      {/* Hero Section: The hero background and overlay are static; hero text is inside fade-element */}
+      <header className="signin-hero">
+        <div className="hero-overlay">
+          <div className="hero-text fade-element">
+            <h1 className="hero-title">Welcome to RealEstateBidding</h1>
+            <p className="hero-subtitle">Streamlining transactions. Maximizing results.</p>
+          </div>
+        </div>
+      </header>
+      {/* Split Layout with 2 Card Containers; entire card containers fade in */}
+      <section className="signin-content">
+        {/* Left Card: Entire container fades in */}
+        <div className="signin-card-container fade-element">
+          <div className="signin-info">
+            <div className="info-overlay">
+              <div className="info-text">
+                <h2 className="info-title">Experience the Future of Real Estate</h2>
+                <p className="info-description">
+                  At RealEstateBidding, innovative technology meets trusted industry expertise to create a transparent, competitive marketplace.
+                  Enjoy faster sales, fair market value, and hassle‑free negotiations—transforming the way you transact.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Right Card: Entire container fades in */}
+        <div className="signin-card-container fade-element">
+          <div className="auth-card">
+            {formType === 'signin' && renderSignIn()}
+            {formType === 'signup' && renderSignUp()}
+            {formType === 'forgot' && renderForgotPassword()}
+          </div>
+        </div>
+      </section>
+      {/* Footer (static) */}
+      <footer className="landing-footer">
+        <p>&copy; {new Date().getFullYear()} RealEstateBidding. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
