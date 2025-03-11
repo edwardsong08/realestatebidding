@@ -68,7 +68,7 @@ const LandingPage = () => {
       {/* Why Choose Section */}
       <section className="why-choose-section">
         <div className="why-choose-content fade-element">
-          <h2>Why Choose RealEstateBidding?</h2>
+          <h2>Why Choose OpenBid?</h2>
           <p className="subheading">
             A smarter way to buy and sell properties—built to align everyone’s interests.
           </p>
@@ -203,7 +203,7 @@ const LandingPage = () => {
         <div className="testimonials">
           <div className="testimonial fade-element">
             <p>
-              "RealEstateBidding revolutionized my approach to property buying. The process is transparent and empowering."
+              "OpenBid revolutionized my approach to property buying. The process is transparent and empowering."
             </p>
             <span>- John Doe, Buyer</span>
           </div>
@@ -237,11 +237,6 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="landing-footer">
-        <p>&copy; {new Date().getFullYear()} RealEstateBidding. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

@@ -12,8 +12,10 @@ const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Enable transparent behavior on landing ("/") and About Us ("/aboutus") pages
-  const enableTransparentBehavior = location.pathname === '/' || location.pathname === '/aboutus' || location.pathname === '/contactus' || location.pathname === '/signin';
+  // Enable transparent behavior on specific pages
+  const enableTransparentBehavior =
+    location.pathname === '/' || location.pathname === '/aboutus' || 
+    location.pathname === '/contactus' || location.pathname === '/signin';
 
   // Refs for clicks outside
   const navMenuContainerRef = useRef(null);
@@ -49,7 +51,12 @@ const NavBar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutsideContainer);
   }, [isOpen]);
 
-  // Scroll handler for landing page
+  // Close hamburger menu when navigating to a new page
+  useEffect(() => {
+    setIsOpen(false); // Automatically close the menu on route change
+  }, [location.pathname]);
+
+  // Scroll handler for specific pages
   useEffect(() => {
     if (!enableTransparentBehavior) {
       setScrolled(true);
@@ -70,7 +77,7 @@ const NavBar = () => {
         <Link to={isAuthenticated ? "/dashboard" : "/"} onClick={() => window.scrollTo(0, 0)}>
           <div className="navbar-logo">
             <img src={logo} alt="Logo" />
-            <span>RealEstateBidding</span>
+            <span>OpenBid</span>
           </div>
         </Link>
         <div className="navbar-links" ref={navMenuContainerRef}>

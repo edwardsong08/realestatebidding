@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
 import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
@@ -10,6 +11,8 @@ import ContactUsAuth from './pages/ContactUsAuth';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import { AuthContext } from './context/AuthContext';
+
+
 
 const App = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -58,6 +61,7 @@ const App = () => {
           }
         />
       </Routes>
+      <Footer /> {/* Footer is now global */}
     </Router>
   );
 };

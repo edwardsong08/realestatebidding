@@ -1,0 +1,19 @@
+/* Ensures the footer is at the bottom */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the full height of the page */
+}
+
+/* Content should push footer to bottom */
+.content-container {
+  flex: 1; /* Takes up remaining space between Navbar and Footer */
+}
+
+/* Footer Section */
+.footer-section {
+  background: var(--dark-grey);
+  color: var(--white);
+  padding: 1.5rem 0;
+  text-align: center;
+}

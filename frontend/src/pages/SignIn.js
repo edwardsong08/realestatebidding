@@ -159,7 +159,7 @@ const AuthForm = () => {
       <header className="signin-hero">
         <div className="hero-overlay">
           <div className="hero-text fade-element">
-            <h1 className="hero-title">Welcome to RealEstateBidding</h1>
+            <h1 className="hero-title">Welcome to OpenBid</h1>
             <p className="hero-subtitle">Streamlining transactions. Maximizing results.</p>
           </div>
         </div>
@@ -173,7 +173,7 @@ const AuthForm = () => {
               <div className="info-text">
                 <h2 className="info-title">Experience the Future of Real Estate</h2>
                 <p className="info-description">
-                  At RealEstateBidding, innovative technology meets trusted industry expertise to create a transparent, competitive marketplace.
+                  At OpenBid, innovative technology meets trusted industry expertise to create a transparent, competitive marketplace.
                   Enjoy faster sales, fair market value, and hassle‑free negotiations—transforming the way you transact.
                 </p>
               </div>
@@ -189,10 +189,6 @@ const AuthForm = () => {
           </div>
         </div>
       </section>
-      {/* Footer (static) */}
-      <footer className="landing-footer">
-        <p>&copy; {new Date().getFullYear()} RealEstateBidding. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

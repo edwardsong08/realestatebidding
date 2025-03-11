@@ -1,4 +1,4 @@
-/* CSS Variables for Consistency */
+/* CSS Variables */
 :root {
   --primary-color: #4facfe;
   --navy-1: #001f3f;
@@ -33,7 +33,15 @@ body {
   transform: translateY(0);
 }
 
-/* About Us Hero Section */
+/* Ensure sections do not fade */
+.story-section,
+.mission-values-section,
+.team-section {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero Section */
 .aboutus-hero-section {
   position: relative;
   width: 100%;
@@ -121,11 +129,6 @@ body {
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.mv-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 .mv-card h2 {
   font-size: 2.2rem;
@@ -151,6 +154,7 @@ body {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem;
+  text-align: center;
 }
 .team-section h2 {
   font-size: 2.8rem;
@@ -196,14 +200,6 @@ body {
 .team-card p {
   font-size: 1rem;
   color: var(--dark-grey);
-}
-
-/* Footer Section */
-.footer-section {
-  background: var(--dark-grey);
-  color: var(--white);
-  padding: 1.5rem 0;
-  text-align: center;
 }
 
 /* Responsive Adjustments */

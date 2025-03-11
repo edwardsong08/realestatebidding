@@ -62,7 +62,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   min-height: 720px; /* Extended page length to show more of the image */
-  padding: 2rem;
+  padding: 2rem 2rem 4rem;
   gap: 2rem;
 }
 
@@ -246,14 +246,6 @@ body {
 .secondary-btn:hover {
   background-color: var(--primary-color);
   color: #fff;
-}
-
-/* Footer Styling (same as Landing and AboutUs pages) */
-.landing-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-  text-align: center;
 }
 
 /* Fade-in Effect for Elements with class 'fade-element' */

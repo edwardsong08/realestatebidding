@@ -27,8 +27,8 @@ const ContactUs = () => {
           <h2>Contact Information</h2>
           <p><strong>Office:</strong> 123 Real Estate Avenue, New York, NY</p>
           <p><strong>Phone:</strong> (123) 456‑7890</p>
-          <p><strong>Email:</strong> info@realestatebidding.com</p>
-          <div className="map-placeholder fade-zoom"></div>
+          <p><strong>Email:</strong> info@OpenBid.com</p>
+          <div className="map-placeholder"></div>
         </div>
         <div className="contact-form-container fade-element">
           <div className="form-header">
@@ -130,9 +130,6 @@ const ContactUs = () => {
           </form>
         </div>
       </section>
-      <footer className="landing-footer">
-        <p>&copy; {new Date().getFullYear()} RealEstateBidding. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

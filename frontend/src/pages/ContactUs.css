@@ -45,15 +45,27 @@
 /* Main Content */
 .contactus-content {
   display: flex;
-  flex-wrap: wrap;
+  align-items: flex-start;
   gap: 2rem;
-  padding: 4rem 2rem;
+  padding: 2rem 2rem 4rem;
   background: var(--light-bg);
 }
-.contact-info,
+/* Left Card - Fixed Height */
+.contact-info {
+  flex: 1; /* Equal width */
+  min-height: 500px; /* Keeps the initial good height */
+  max-width: 50%; /* Ensures it remains equal in width */
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Prevents unwanted expansion */
+}
+
+/* Right Card - Dynamic Height */
 .contact-form-container {
-  flex: 1;
-  min-width: 300px;
+  flex: 1; /* Equal width */
+  max-width: 50%; /* Ensures equal width */
   background: #fff;
   border-radius: 8px;
   padding: 2rem;
@@ -67,8 +79,8 @@
   margin-bottom: 0.5rem;
 }
 .map-placeholder {
-  height: 200px;
-  background: url('./tempimagemap.jpg') center/cover no-repeat;
+  height: 400px;
+  background: url('./map-placeholder.jpg') center/cover no-repeat;
   border-radius: 8px;
   margin-top: 1rem;
   z-index: 100; position: relative;
@@ -139,13 +151,6 @@
   background-color: #337ab7;
 }
 
-.landing-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-  text-align: center;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .contactus-content {
@@ -164,13 +169,3 @@
   transform: translateY(0);
 }
 
-.fade-zoom {
-  opacity: 0;
-  transform: scale(1.2);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-zoom.fade-in {
-  opacity: 1;
-  transform: scale(1);
-}
