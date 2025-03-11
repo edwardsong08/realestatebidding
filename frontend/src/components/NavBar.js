@@ -12,10 +12,17 @@ const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Helper function to scroll to top
+  const handleLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
+
   // Enable transparent behavior on specific pages
   const enableTransparentBehavior =
-    location.pathname === '/' || location.pathname === '/aboutus' || 
-    location.pathname === '/contactus' || location.pathname === '/signin';
+    location.pathname === '/' ||
+    location.pathname === '/aboutus' ||
+    location.pathname === '/contactus' ||
+    location.pathname === '/signin';
 
   // Refs for clicks outside
   const navMenuContainerRef = useRef(null);
@@ -53,7 +60,7 @@ const NavBar = () => {
 
   // Close hamburger menu when navigating to a new page
   useEffect(() => {
-    setIsOpen(false); // Automatically close the menu on route change
+    setIsOpen(false);
   }, [location.pathname]);
 
   // Scroll handler for specific pages
@@ -66,72 +73,92 @@ const NavBar = () => {
       if (window.scrollY > 50) setScrolled(true);
       else setScrolled(false);
     };
-    handleScroll(); // Set initial state
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [enableTransparentBehavior, location.pathname]);
 
+  // Handle ESC key to close menu for better keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="navbar-inner">
-        <Link to={isAuthenticated ? "/dashboard" : "/"} onClick={() => window.scrollTo(0, 0)}>
-          <div className="navbar-logo">
-            <img src={logo} alt="Logo" />
-            <span>OpenBid</span>
-          </div>
-        </Link>
-        <div className="navbar-links" ref={navMenuContainerRef}>
-          <ul className={`navbar-menu ${isOpen ? 'open' : ''}`}>
-            {isAuthenticated ? (
-              <>
-                <li>
-                  <Link to="/dashboard" onClick={() => window.scrollTo(0, 0)}>My Dashboard</Link>
-                </li>
-                <li>
-                  <Link to="/bids" onClick={() => window.scrollTo(0, 0)}>Bids</Link>
-                </li>
-                <li className="dropdown" ref={dropdownRef}>
-                  <button className="dropdown-toggle" onClick={toggleSettings}>Settings</button>
-                  {settingsOpen && (
-                    <ul className="dropdown-menu open">
-                      <li>
-                        <Link to="/settings/account" onClick={() => window.scrollTo(0, 0)}>My Account Settings</Link>
-                      </li>
-                      <li>
-                        <Link to="/dashboard/contactus" onClick={() => window.scrollTo(0, 0)}>Contact Us</Link>
-                      </li>
-                      <li>
-                        <button className="dropdown-link" onClick={handleSignOut}>Sign Out</button>
-                      </li>
-                    </ul>
-                  )}
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link to="/" onClick={() => window.scrollTo(0, 0)}>Home</Link>
-                </li>
-                <li>
-                  <Link to="/aboutus" onClick={() => window.scrollTo(0, 0)}>About Us</Link>
-                </li>
-                <li>
-                  <Link to="/contactus" onClick={() => window.scrollTo(0, 0)}>Contact Us</Link>
-                </li>
-                <li className="sign-in-link">
-                  <Link to="/signin" onClick={() => window.scrollTo(0, 0)}>Sign In</Link>
-                </li>
-              </>
-            )}
-          </ul>
-          <div className="hamburger" onClick={toggleMenu}>
-            <div className="bar"></div>
-            <div className="bar"></div>
-            <div className="bar"></div>
+    <>
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        <div className="navbar-inner">
+          <Link to={isAuthenticated ? "/dashboard" : "/"} onClick={handleLinkClick}>
+            <div className="navbar-logo">
+              <img src={logo} alt="Logo" />
+              <span>OpenBid</span>
+            </div>
+          </Link>
+          <div className="navbar-links" ref={navMenuContainerRef}>
+            <ul className={`navbar-menu ${isOpen ? 'open' : ''}`}>
+              {isAuthenticated ? (
+                <>
+                  <li>
+                    <Link to="/dashboard" onClick={handleLinkClick}>My Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link to="/bids" onClick={handleLinkClick}>Bids</Link>
+                  </li>
+                  <li className="dropdown" ref={dropdownRef}>
+                    <button className="dropdown-toggle" onClick={toggleSettings}>Settings</button>
+                    {settingsOpen && (
+                      <ul className="dropdown-menu open">
+                        <li>
+                          <Link to="/settings/account" onClick={handleLinkClick}>My Account Settings</Link>
+                        </li>
+                        <li>
+                          <Link to="/dashboard/contactus" onClick={handleLinkClick}>Contact Us</Link>
+                        </li>
+                        <li>
+                          <button className="dropdown-link" onClick={handleSignOut}>Sign Out</button>
+                        </li>
+                      </ul>
+                    )}
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to="/" onClick={handleLinkClick}>Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/aboutus" onClick={handleLinkClick}>About Us</Link>
+                  </li>
+                  <li>
+                    <Link to="/contactus" onClick={handleLinkClick}>Contact Us</Link>
+                  </li>
+                  <li className="sign-in-link">
+                    <Link to="/signin" onClick={handleLinkClick}>Sign In</Link>
+                  </li>
+                </>
+              )}
+            </ul>
+            <button
+              className={`hamburger ${isOpen ? 'open' : ''}`}
+              onClick={toggleMenu}
+              aria-label="Toggle navigation"
+              aria-expanded={isOpen}
+              type="button"
+            >
+              <span className="bar"></span>
+              <span className="bar"></span>
+              <span className="bar"></span>
+            </button>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+      {isOpen && <div className="navbar-overlay" onClick={toggleMenu}></div>}
+    </>
   );
 };
 
