@@ -1,40 +1,64 @@
-Real Estate Bidding Platform Description
+# Real Estate Bidding Platform
 
-Goal: create a real time bidding platform for property sellers and real estate agents to list available properties and for buyers to bid, creating transparency in the market and real estate transaction procedures.
+A real-time bidding platform designed to bring transparency to the property market by enabling sellers and real estate agents to list properties and allowing buyers to bid securely.
 
-Front End React Framework: combination of static pages and react components/apps to optimize performance and security; rendering UI
+---
 
-Back End Django: python for data manipulation logic, ORN communication with database, and modules; API Calls: REST, GraphQL
+## Table of Contents
 
-Modules to be included: 
-    SQL Database for CRUD and Queries, 
-    Real-Time Service: Web Sockets with Real-Time Updates, 
-    Authentication Module: JWT or OAuth2, 
-    User Management and Account Services, 
-    Property Listing Module: Bid Placement and Validation, 
-    Notification Serviecs: Email, SMS APIs, 
-    Admin Interface: Agent Management;
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture Diagram](#architecture-diagram)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-General Overview (Mermaid Diagram): 
-    graph TD
-        A["Client Browser: HTML, CSS, JS"];
-        B["Frontend App: React, Angular, Vue"];
-        C["Backend API: Python, Django, Flask, FastAPI"];
-        D["SQL Database: PostgreSQL, MySQL"];
-        E["Real-Time Service: WebSockets"];
-        F["Authentication Module: JWT, OAuth2"];
-        G["User Management & Account Services"];
-        H["Property Listings Module: CRUD, Search, Map Integration"];
-        I["Bidding Module: Bid Placement, Validation"];
-        J["Notification Service: Email, SMS API"];
-        K["Admin Interface: Agent Management"];
-        A -->|Renders UI| B;
-        B -->|API Calls: REST, GraphQL| C;
-        C -->|CRUD & Queries| D;
-        C -->|Real-Time Updates| E;
-        C --> F;
-        C --> G;
-        C --> H;
-        C --> I;
-        C --> J;
-        C --> K;
+---
+
+## Overview
+
+The goal of this project is to create a robust, real-time bidding platform that simplifies real estate transactions. By integrating modern web technologies, the platform ensures transparency, security, and a seamless user experience for property listings and bidding.
+
+---
+
+## Features
+
+- **Real-Time Bidding:** Buyers can place bids in real time.
+- **Property Listings:** Sellers and agents can list properties with detailed information.
+- **Secure Authentication:** Options for JWT or OAuth2 based authentication.
+- **User Management:** Account services and management for both buyers and sellers.
+- **Real-Time Updates:** WebSockets for live updates on bids and property statuses.
+- **Notifications:** Email and SMS notifications for important events.
+- **Admin Interface:** Management tools for real estate agents and platform administrators.
+
+---
+
+## Tech Stack
+
+- **Frontend:** 
+  - **Framework:** React  
+  - **Approach:** Combination of static pages and dynamic React components for optimized performance and security.
+
+- **Backend:** 
+  - **Framework:** Django (Python)  
+  - **API Calls:** Supports both REST and GraphQL for flexible communication.
+  - **ORM:** Efficient database communication and data manipulation.
+
+- **Database:** 
+  - SQL databases (e.g., PostgreSQL, MySQL) for robust CRUD operations and complex queries.
+
+- **Real-Time Services:** 
+  - WebSockets for instantaneous updates and interactions.
+
+- **Authentication:** 
+  - JWT or OAuth2 based solutions to secure user sessions.
+
+- **Modules:**
+  - **User Management & Account Services**
+  - **Property Listing:** Includes bid placement and validation.
+  - **Notification Services:** Integrations with Email and SMS APIs.
+  - **Admin Interface:** For agent and property management.
+
