@@ -9,12 +9,6 @@ A real-time bidding platform designed to bring transparency to the property mark
 - [Overview](#overview)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Architecture Diagram](#architecture-diagram)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
 ---
 
@@ -62,3 +56,4 @@ The goal of this project is to create a robust, real-time bidding platform that 
   - **Notification Services:** Integrations with Email and SMS APIs.
   - **Admin Interface:** For agent and property management.
 
+## Future Enhancements
