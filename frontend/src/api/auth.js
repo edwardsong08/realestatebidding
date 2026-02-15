@@ -2,18 +2,19 @@
 
 import axios from 'axios';
 
-
-
-// Define the base URL for your Django accounts API endpoints.
-// In this example, your Django server is running on localhost:8000,
-// and your accounts URLs are included under 'api/accounts/' in your main urls.py.
-const API_BASE_URL = 'http://localhost:8000/api/accounts/';
+// Use env var in production (Vercel), fallback to local Django for dev.
+// NOTE: In Create React App, env vars must start with REACT_APP_
+// Example (local): REACT_APP_API_BASE_URL=http://localhost:8000
+// Example (prod):  REACT_APP_API_BASE_URL=https://your-backend.onrender.com
+const API_BASE_URL =
+  (process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000') +
+  '/api/accounts/';
 
 /**
  * signUp: Sends a POST request to the sign-up endpoint to create a new user.
  *
  * @param {Object} userData - An object containing the new user's details.
- *   Expected properties (based on our serializer): 
+ *   Expected properties (based on our serializer):
  *     - username (string)
  *     - email (string, optional)
  *     - password (string)
