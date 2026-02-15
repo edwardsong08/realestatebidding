@@ -21,9 +21,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 # Falls back to the original dev key if DJANGO_SECRET_KEY is not set.
 SECRET_KEY = os.getenv(
@@ -32,14 +29,18 @@ SECRET_KEY = os.getenv(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
+# IMPORTANT: default to False so cloud deploys are safe unless you explicitly enable debug.
+DEBUG = os.getenv("DJANGO_DEBUG", "False").lower() == "true"
 
-# Hosts (Render sets a public hostname; in dev you can leave it empty)
-if DEBUG:
-    ALLOWED_HOSTS = []
+# Hosts
+# Use comma-separated DJANGO_ALLOWED_HOSTS in Render, e.g.:
+# DJANGO_ALLOWED_HOSTS="realestatebidding.onrender.com,localhost,127.0.0.1"
+_allowed_hosts = os.getenv("DJANGO_ALLOWED_HOSTS", "")
+if _allowed_hosts.strip():
+    ALLOWED_HOSTS = [h.strip() for h in _allowed_hosts.split(",") if h.strip()]
 else:
-    # Example: DJANGO_ALLOWED_HOSTS="your-service.onrender.com,localhost,127.0.0.1"
-    ALLOWED_HOSTS = [h.strip() for h in os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",") if h.strip()]
+    # Reasonable local defaults (won't hurt prod if env var is set correctly)
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 # Application definition
 
@@ -93,7 +94,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "myproject.wsgi.application"
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -115,7 +115,6 @@ else:
     }
 
 # Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -125,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
 
@@ -135,12 +133,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
+# Static files
 
 STATIC_URL = "static/"
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
