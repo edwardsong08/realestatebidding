@@ -8,6 +8,12 @@
   --transition-ease: ease;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .contactus-page {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: var(--text-color);
@@ -22,6 +28,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .contactus-hero .overlay {
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
@@ -32,77 +39,91 @@
   align-items: center;
   justify-content: center;
   color: #fff;
+  padding: 1rem;
 }
+
 .contactus-hero h1 {
   font-size: 3rem;
   margin: 0;
 }
+
 .contactus-hero p {
   font-size: 1.2rem;
   margin-top: 1rem;
+  max-width: 900px;
 }
 
-/* Main Content */
+/* Main Content (match SignIn behavior: wrap + responsive cards) */
 .contactus-content {
   display: flex;
-  align-items: flex-start;
+  flex-wrap: wrap;
   gap: 2rem;
   padding: 2rem 2rem 4rem;
   background: var(--light-bg);
-}
-/* Left Card - Fixed Height */
-.contact-info {
-  flex: 1; /* Equal width */
-  min-height: 500px; /* Keeps the initial good height */
-  max-width: 50%; /* Ensures it remains equal in width */
-  background: #fff;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Prevents unwanted expansion */
+  min-height: 720px;
 }
 
-/* Right Card - Dynamic Height */
-.contact-form-container {
-  flex: 1; /* Equal width */
-  max-width: 50%; /* Ensures equal width */
+/* Left Card */
+.contact-info {
+  flex: 1;
+  min-width: 300px;
   background: #fff;
   border-radius: 8px;
   padding: 2rem;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
+
 .contact-info h2 {
   color: var(--primary-color);
   margin-bottom: 1rem;
 }
+
 .contact-info p {
   margin-bottom: 0.5rem;
 }
+
 .map-placeholder {
   height: 400px;
   background: url('./map-placeholder.jpg') center/cover no-repeat;
   border-radius: 8px;
   margin-top: 1rem;
-  z-index: 100; position: relative;
+  position: relative;
+  z-index: 1;
+}
+
+/* Right Card */
+.contact-form-container {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Tabs for Form */
 .form-header .tabs {
   display: flex;
   justify-content: space-around;
+  gap: 0.75rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap; /* KEY: allow wrapping on small screens */
 }
+
 .tabs button {
   background: none;
   border: none;
   font-size: 1rem;
   font-weight: bold;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
   cursor: pointer;
   color: var(--text-color);
   border-bottom: 2px solid transparent;
   transition: border-color var(--transition-duration);
+  white-space: nowrap;
 }
+
 .tabs button.active {
   border-color: var(--primary-color);
   color: var(--primary-color);
@@ -112,12 +133,14 @@
 .contact-form .form-group {
   margin-bottom: 1.5rem;
 }
+
 .contact-form label {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
   color: var(--secondary-color);
 }
+
 .contact-form input,
 .contact-form textarea {
   width: 100%;
@@ -127,15 +150,19 @@
   font-size: 1rem;
   transition: border-color var(--transition-duration);
 }
+
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: var(--primary-color);
   outline: none;
 }
+
 .contact-form textarea {
   resize: vertical;
   min-height: 120px;
 }
+
+/* Button */
 .btn {
   background-color: var(--primary-color);
   color: #fff;
@@ -147,17 +174,12 @@
   width: 100%;
   transition: background-color var(--transition-duration);
 }
+
 .btn:hover {
   background-color: #337ab7;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .contactus-content {
-    flex-direction: column;
-  }
-}
-
+/* Fade-in */
 .fade-element {
   opacity: 0;
   transform: translateY(20px);
@@ -169,3 +191,32 @@
   transform: translateY(0);
 }
 
+/* Responsive (match SignIn: stack + reduce padding) */
+@media (max-width: 768px) {
+  .contactus-content {
+    flex-direction: column;
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .contact-info,
+  .contact-form-container {
+    padding: 1.5rem;
+  }
+
+  .contactus-hero h1 {
+    font-size: 2.3rem;
+  }
+
+  .contactus-hero p {
+    font-size: 1.05rem;
+  }
+
+  .map-placeholder {
+    height: 240px;
+  }
+
+  .tabs button {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.6rem;
+  }
+}
