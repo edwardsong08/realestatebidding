@@ -221,7 +221,10 @@ html, body {
 .fullwidth-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, calc((100vw / 2) / 1.3));
+
+  /* FIX: keep your visual height as a minimum, but allow rows to grow for text */
+  grid-template-rows: repeat(3, minmax(calc((100vw / 2) / 1.3), auto));
+
   gap: 0;
   width: 100%;
 }
@@ -244,15 +247,16 @@ html, body {
   padding: 2rem;
 }
 
+/* OPTIONAL (included): responsive typography to prevent mid-width overflow */
 .text-box h3 {
-  font-size: 2.2rem;
+  font-size: clamp(1.6rem, 2vw, 2.2rem);
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--primary-color);
 }
 
 .text-box p {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
   line-height: 1.6;
   margin-bottom: 1rem;
 }
@@ -267,7 +271,7 @@ html, body {
 }
 
 .text-box ul li {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
   margin-bottom: 0.5rem;
   position: relative;
   padding-left: 1rem;
@@ -450,5 +454,45 @@ html, body {
     height: auto;
     padding: 2rem 1rem;
   }
-}
 
+  /* Mobile fix: "What We Can Do For You" section */
+  .fullwidth-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto; /* let content define height */
+  }
+
+  /* Stop forcing short fixed heights on mobile */
+  .fullwidth-grid .grid-item {
+    height: auto;
+    min-height: 0;
+  }
+
+  /* Give images a consistent mobile height */
+  .fullwidth-grid .image-box {
+    height: 220px;
+  }
+
+  /* Ensure inner bg fills the new fixed image height */
+  .fullwidth-grid .image-inner {
+    height: 100%;
+  }
+
+  /* Reorder to A, B, D, C, E, F */
+  .grid-A { order: 1; }
+  .grid-B { order: 2; }
+  .grid-D { order: 3; }
+  .grid-C { order: 4; }
+  .grid-E { order: 5; }
+  .grid-F { order: 6; }
+
+  /* Make text fit better on mobile */
+  .text-box {
+    padding: 1.25rem 1rem;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .text-box ul {
+    max-width: 100%;
+  }
+}

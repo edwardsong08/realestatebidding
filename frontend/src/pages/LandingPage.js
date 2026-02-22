@@ -24,7 +24,6 @@ const LandingPage = () => {
         heroSection.style.backgroundPosition = `center calc(40% + ${offset}px)`;
       }
     };
-    
 
     window.addEventListener('scroll', handleScroll);
 
@@ -56,7 +55,7 @@ const LandingPage = () => {
       <section className="hero-section">
         <div className="hero-content fade-element">
           <h1>
-            Real estate made simple. <br/>
+            Real estate made simple. <br />
             Streamline your transactions and maximize results.
           </h1>
           <Link to="/signin?form=signup" className="cta-button">
@@ -95,77 +94,91 @@ const LandingPage = () => {
       {/* Full-Width "What We Can Do for You" Section */}
       <section className="what-we-can-fullwidth">
         <div className="fullwidth-grid">
-          {/* Top Left: Image for Buyers with zoom effect */}
-          <div className="grid-item image-box top-left">
+          {/* A: Top Left: Image for Buyers with zoom effect */}
+          <div className="grid-item image-box top-left grid-A">
             <div
               className="image-inner fade-zoom"
               style={{ backgroundImage: `url(${buyersImage})` }}
             ></div>
           </div>
-          {/* Top Right: Text for Buyers */}
-          <div className="grid-item text-box top-right">
+
+          {/* B: Top Right: Text for Buyers */}
+          <div className="grid-item text-box top-right grid-B">
             <div className="text-fade fade-text">
               <h3>For Buyers</h3>
               <p>Find your dream home with confidence in an open, competitive marketplace.</p>
               <ul>
                 <li>
-                  <strong>Fair Market Value:</strong> Competitive bidding ensures properties sell for what they’re worth.
+                  <strong>Fair Market Value:</strong> Competitive bidding ensures properties sell for what
+                  they’re worth.
                 </li>
                 <li>
-                  <strong>Committed Sellers:</strong> Only serious sellers list on our platform, reducing wasted time.
+                  <strong>Committed Sellers:</strong> Only serious sellers list on our platform, reducing
+                  wasted time.
                 </li>
                 <li>
-                  <strong>Seamless Planning:</strong> Transparent timelines let you plan your purchase without surprises.
+                  <strong>Seamless Planning:</strong> Transparent timelines let you plan your purchase
+                  without surprises.
                 </li>
               </ul>
             </div>
           </div>
-          {/* Middle Left: Text for Sellers */}
-          <div className="grid-item text-box middle-left">
+
+          {/* C: Middle Left: Text for Sellers */}
+          <div className="grid-item text-box middle-left grid-C">
             <div className="text-fade fade-text">
               <h3>For Sellers</h3>
               <p>Maximize your property’s value with the power of competitive bidding.</p>
               <ul>
                 <li>
-                  <strong>Faster Sales, Lower Costs:</strong> Selling quickly reduces taxes, maintenance, and holding costs.
+                  <strong>Faster Sales, Lower Costs:</strong> Selling quickly reduces taxes, maintenance,
+                  and holding costs.
                 </li>
                 <li>
-                  <strong>Better Offers Through Competition:</strong> Auctions drive prices higher than traditional negotiations.
+                  <strong>Better Offers Through Competition:</strong> Auctions drive prices higher than
+                  traditional negotiations.
                 </li>
                 <li>
-                  <strong>Unmatched Market Exposure:</strong> Gain access to a wide pool of motivated buyers.
+                  <strong>Unmatched Market Exposure:</strong> Gain access to a wide pool of motivated
+                  buyers.
                 </li>
               </ul>
             </div>
           </div>
-          {/* Middle Right: Image for Sellers with zoom effect */}
-          <div className="grid-item image-box middle-right">
+
+          {/* D: Middle Right: Image for Sellers with zoom effect */}
+          <div className="grid-item image-box middle-right grid-D">
             <div
               className="image-inner fade-zoom"
               style={{ backgroundImage: `url(${sellersImage})` }}
             ></div>
           </div>
-          {/* Bottom Left: Image for Agents with zoom effect */}
-          <div className="grid-item image-box bottom-left">
+
+          {/* E: Bottom Left: Image for Agents with zoom effect */}
+          <div className="grid-item image-box bottom-left grid-E">
             <div
               className="image-inner fade-zoom"
               style={{ backgroundImage: `url(${agentsImage})` }}
             ></div>
           </div>
-          {/* Bottom Right: Text for Agents & Partners */}
-          <div className="grid-item text-box bottom-right">
+
+          {/* F: Bottom Right: Text for Agents & Partners */}
+          <div className="grid-item text-box bottom-right grid-F">
             <div className="text-fade fade-text">
               <h3>For Real Estate Agents &amp; Partners</h3>
               <p>Expand your client base and close deals faster with tech-powered transactions.</p>
               <ul>
                 <li>
-                  <strong>Shorter Sales Cycles:</strong> Auctions speed up transactions, minimizing market delays.
+                  <strong>Shorter Sales Cycles:</strong> Auctions speed up transactions, minimizing market
+                  delays.
                 </li>
                 <li>
-                  <strong>Higher Client Satisfaction:</strong> Transparent and efficient processes build trust.
+                  <strong>Higher Client Satisfaction:</strong> Transparent and efficient processes build
+                  trust.
                 </li>
                 <li>
-                  <strong>Access to a Larger Buyer Network:</strong> More competition means more successful sales.
+                  <strong>Access to a Larger Buyer Network:</strong> More competition means more
+                  successful sales.
                 </li>
               </ul>
             </div>
@@ -178,7 +191,8 @@ const LandingPage = () => {
         <div className="where-we-operate-content fade-element">
           <h2>Where We Operate</h2>
           <p className="subheading">
-            Serving New York &amp; New Jersey with full compliance to state regulations—ensuring transparency and reliability.
+            Serving New York &amp; New Jersey with full compliance to state regulations—ensuring
+            transparency and reliability.
           </p>
           <div className="state-cards">
             <div className="state-card fade-element">
@@ -203,13 +217,15 @@ const LandingPage = () => {
         <div className="testimonials">
           <div className="testimonial fade-element">
             <p>
-              "OpenBid revolutionized my approach to property buying. The process is transparent and empowering."
+              "OpenBid revolutionized my approach to property buying. The process is transparent and
+              empowering."
             </p>
             <span>- John Doe, Buyer</span>
           </div>
           <div className="testimonial fade-element">
             <p>
-              "This platform streamlines every step of the property sale. It's a game-changer for our agency."
+              "This platform streamlines every step of the property sale. It's a game-changer for our
+              agency."
             </p>
             <span>- Jane Smith, Real Estate Agent</span>
           </div>
@@ -228,8 +244,8 @@ const LandingPage = () => {
           <div className="text-fade fade-text">
             <h2>Experience the Future of Real Estate Transactions</h2>
             <p>
-              Explore a platform where every detail is engineered for transparency and efficiency.
-              Ready to transform the way you transact? Dive in and discover the benefits.
+              Explore a platform where every detail is engineered for transparency and efficiency. Ready
+              to transform the way you transact? Dive in and discover the benefits.
             </p>
             <Link to="/signin?form=signup" className="cta-button">
               Get Started
