@@ -16,16 +16,24 @@ const LandingPage = () => {
     // Scroll to the top on mount
     window.scrollTo(0, 0);
 
-    // Parallax effect: adjust background position on scroll
+    // Parallax effect (throttled): adjust background position on scroll
+    const heroSection = document.querySelector('.hero-section');
+    let ticking = false;
+
     const handleScroll = () => {
-      const offset = window.pageYOffset * 0.5;
-      const heroSection = document.querySelector('.hero-section');
-      if (heroSection) {
+      if (!heroSection) return;
+      if (ticking) return;
+
+      ticking = true;
+
+      window.requestAnimationFrame(() => {
+        const offset = window.pageYOffset * 0.5;
         heroSection.style.backgroundPosition = `center calc(40% + ${offset}px)`;
-      }
+        ticking = false;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     // Intersection Observer for fade-in effects.
     const observer = new IntersectionObserver(

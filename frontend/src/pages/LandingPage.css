@@ -80,7 +80,10 @@ html, body {
 .hero-section {
   height: 100vh;
   overflow: hidden;
-  background: url('./herobg.jpg') center/cover no-repeat;
+  /* Serve the smaller hero image by default (mobile-first) */
+  background-image: url('./herobg-1200.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
   position: relative;
   display: flex;
   align-items: center;
@@ -90,6 +93,13 @@ html, body {
   padding: 0 var(--section-padding);
   /* Initial background position */
   background-position: center 40%;
+}
+
+/* Larger hero image for desktop */
+@media (min-width: 900px) {
+  .hero-section {
+    background-image: url('./herobg-2560.webp');
+  }
 }
 
 .hero-content {
