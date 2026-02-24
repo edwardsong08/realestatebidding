@@ -24,7 +24,7 @@ body {
 .signin-hero {
   position: relative;
   height: 300px; /* Matches the ContactUs hero height */
-  background: url('./signin-hero.jpg') center/cover no-repeat;
+  background: url('./signin-hero.webp') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,7 +79,7 @@ body {
 /* Left Card: Image in a Card with Platform Benefits */
 .signin-info {
   height: 100%;
-  background: url('./signin-info.jpg') center/cover no-repeat;
+  background: url('./signin-info.webp') center/cover no-repeat;
   position: relative;
 }
 

@@ -23,7 +23,7 @@
 .contactus-hero {
   position: relative;
   height: 300px;
-  background: url('./contact-hero.jpg') center/cover no-repeat;
+  background: url('./contact-hero.webp') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
