@@ -85,7 +85,7 @@
 
 .map-placeholder {
   height: 400px;
-  background: url('./map-placeholder.jpg') center/cover no-repeat;
+  background: url('./map-placeholder.webp') center/cover no-repeat;
   border-radius: 8px;
   margin-top: 1rem;
   position: relative;
