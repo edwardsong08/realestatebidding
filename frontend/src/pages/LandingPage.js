@@ -4,12 +4,12 @@ import './LandingPage.css';
 import salesIcon from './resources/sales.png';
 import negotiationsIcon from './resources/negotiations.png';
 import auctionIcon from './resources/auction.png';
-import buyersImage from './resources/homebuyer.jpg';
-import sellersImage from './resources/homeseller.jpg';
-import agentsImage from './resources/realestateagent.jpg';
+import buyersImage from './resources/homebuyer.webp';
+import sellersImage from './resources/homeseller.webp';
+import agentsImage from './resources/realestateagent.webp';
 import newYorkIcon from './resources/new-york.png';
 import newJerseyIcon from './resources/new-jersey.png';
-import callToActionImg from './resources/calltoactionimg.jpg';
+import callToActionImg from './resources/calltoactionimg.webp';
 
 const LandingPage = () => {
   useEffect(() => {
