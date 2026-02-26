@@ -6,6 +6,9 @@
   --light-bg: #f1f3f5;
   --transition-duration: 0.3s;
   --transition-ease: ease;
+
+  /* add this so we can reference your fixed navbar height */
+  --navbar-height: 60px;
 }
 
 *,
@@ -23,7 +26,7 @@ body {
 /* Hero Section with Welcome Text */
 .signin-hero {
   position: relative;
-  height: 300px; /* Matches the ContactUs hero height */
+  height: 300px;
   background: url('./signin-hero.webp') center/cover no-repeat;
   display: flex;
   align-items: center;
@@ -61,12 +64,11 @@ body {
 .signin-content {
   display: flex;
   flex-wrap: wrap;
-  min-height: 720px; /* Extended page length to show more of the image */
+  min-height: 720px;
   padding: 2rem 2rem 4rem;
   gap: 2rem;
 }
 
-/* Card Container (applied to both cards; entire container fades in) */
 .signin-card-container {
   flex: 1;
   min-width: 300px;
@@ -76,14 +78,12 @@ body {
   overflow: hidden;
 }
 
-/* Left Card: Image in a Card with Platform Benefits */
 .signin-info {
   height: 100%;
   background: url('./signin-info.webp') center/cover no-repeat;
   position: relative;
 }
 
-/* The opaque overlay is static */
 .info-overlay {
   background: rgba(0, 0, 0, 0.6);
   width: 100%;
@@ -91,12 +91,11 @@ body {
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* Place text near the bottom */
+  justify-content: flex-end;
   align-items: center;
   text-align: center;
 }
 
-/* Info text styles */
 .info-text {
   color: #fff;
 }
@@ -112,12 +111,11 @@ body {
   max-width: 90%;
 }
 
-/* Right Card: Authentication Form (aligned toward the top) */
 .auth-card {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Align content at the top */
+  justify-content: flex-start;
   padding: 2.5rem;
   background: #fff;
 }
@@ -165,7 +163,6 @@ body {
   margin-top: 0.5rem;
 }
 
-/* Primary button */
 .btn {
   width: 100%;
   padding: 0.75rem;
@@ -201,8 +198,6 @@ body {
   color: #fff;
 }
 
-
-/* Divider with OR text */
 .or-divider {
   display: flex;
   align-items: center;
@@ -223,7 +218,6 @@ body {
   color: #666;
 }
 
-/* Action Buttons: Secondary Buttons (stacked vertically) */
 .action-buttons {
   display: flex;
   flex-direction: column;
@@ -248,7 +242,6 @@ body {
   color: #fff;
 }
 
-/* Fade-in Effect for Elements with class 'fade-element' */
 .fade-element {
   opacity: 0;
   transform: translateY(20px);
@@ -265,10 +258,18 @@ body {
   .signin-content {
     flex-direction: column;
   }
+
   .signin-card-container {
     min-height: auto;
   }
+
   .auth-card {
     padding: 1.5rem;
+  }
+
+  /* KEY FIX #3:
+     Push hero text down so it doesn't sit under the fixed navbar */
+  .hero-overlay {
+    padding-top: calc(1rem + var(--navbar-height));
   }
 }

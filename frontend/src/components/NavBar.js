@@ -137,8 +137,12 @@ const NavBar = () => {
                   <li>
                     <Link to="/contactus" onClick={handleLinkClick}>Contact Us</Link>
                   </li>
+
+                  {/* KEY FIX:
+                      Always navigate with ?form=signin so clicking Sign In
+                      switches to sign-in mode even if you're already on /signin. */}
                   <li className="sign-in-link">
-                    <Link to="/signin" onClick={handleLinkClick}>Sign In</Link>
+                    <Link to="/signin?form=signin" onClick={handleLinkClick}>Sign In</Link>
                   </li>
                 </>
               )}
